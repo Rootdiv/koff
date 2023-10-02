@@ -1,13 +1,474 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" src="/main.js"></script>
-    <title>Vite App</title>
+    <title>Мебельный маркет Koff</title>
   </head>
   <body>
-    <div id="app"></div>
+    <header class="header">
+      <div class="container header__container">
+        <a href="/" class="header__link-logo">
+          <img src="/img/logo.svg" alt="Логотип мебельного маркета Koff" class="header__logo" />
+        </a>
+        <form action="/api/product" class="header__search">
+          <input type="search" name="search" placeholder="Введите запрос" class="header__input" />
+          <button type="submit" class="header__btn">
+            <svg width="16" height="16">
+              <use href="/img/sprite.svg#search" />
+            </svg>
+          </button>
+        </form>
+      </div>
+      <div class="header__control">
+        <a href="/favorites" class="header__link">
+          <span class="header__link-text">Избранное</span>
+          <svg width="16" height="16">
+            <use href="/img/sprite.svg#favorite" />
+          </svg>
+        </a>
+        <a href="/cart" class="header__link">
+          <span class="header__link-text">Корзина</span>
+          <span class="header__count">(5)</span>
+          <svg width="16" height="16">
+            <use href="/img/sprite.svg#cart" />
+          </svg>
+        </a>
+      </div>
+    </header>
+    <main>
+      <nav class="catalog">
+        <div class="container catalog__container">
+          <ul class="catalog__list">
+            <li class="catalog__item">
+              <a href="/category?slug=Диваны" class="catalog__link">Диваны</a>
+            </li>
+            <li class="catalog__item">
+              <a href="/category?slug=Шкафы" class="catalog__link">Шкафы</a>
+            </li>
+            <li class="catalog__item">
+              <a href="/category?slug=Стулья" class="catalog__link">Стулья</a>
+            </li>
+            <li class="catalog__item">
+              <a href="/category?slug=Тумбы" class="catalog__link">Тумбы</a>
+            </li>
+            <li class="catalog__item">
+              <a href="/category?slug=Кровати" class="catalog__link">Кровати</a>
+            </li>
+            <li class="catalog__item">
+              <a href="/category?slug=Столы" class="catalog__link">Столы</a>
+            </li>
+            <li class="catalog__item">
+              <a href="/category?slug=Комоды" class="catalog__link">Комоды</a>
+            </li>
+            <li class="catalog__item">
+              <a href="/category?slug=Матрасы" class="catalog__link">Матрасы</a>
+            </li>
+            <li class="catalog__item">
+              <a href="/category?slug=Пуфики" class="catalog__link">Пуфики</a>
+            </li>
+            <li class="catalog__item">
+              <a href="/category?slug=Стеллажи" class="catalog__link">Стеллажи</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="breadcrumb">
+        <div class="container">
+          <ul class="breadcrumb__list">
+            <li class="breadcrumb__item">
+              <a href="/" class="breadcrumb__link">Главная</a>
+              <span class="breadcrumb__separator">&gt;</span>
+            </li>
+            <li class="breadcrumb__item">
+              <a href="/categoty?slug=Кресла" class="breadcrumb__link">Кресла</a>
+              <span class="breadcrumb__separator">&gt;</span>
+            </li>
+            <li class="breadcrumb__item">
+              <a class="breadcrumb__link">Кресло с подлокотниками</a>
+              <span class="breadcrumb__separator">&gt;</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <section class="goods" hidden>
+        <div class="container">
+          <h2 class="goods__title">Избранное</h2>
+        </div>
+        <ul class="goods__list">
+          <li class="goods__item">
+            <article class="goods__card card">
+              <a href="/product" class="card__link">
+                <img src="/img/photo.jpg" alt="Кресло с подлокотниками" class="card__img">
+              </a>
+              <h3 class="card__title">
+                <a href="/product" class="card__link">
+                  Кресло с подлокотниками
+                </a>
+              </h3>
+              <p class="card__price">5&nbsp;000&nbsp;&#8381;</p>
+              <button type="button" class="card__btn">В корзину</button>
+              <button type="button" class="card__favorite">
+                <svg width="16" height="16">
+                  <use href="/img/sprite.svg#favorite" />
+                </svg>
+              </button>
+            </article>
+          </li>
+          <li class="goods__item">
+            <article class="goods__card card">
+              <a href="/product" class="card__link">
+                <img src="/img/photo.jpg" alt="Кресло с подлокотниками" class="card__img">
+              </a>
+              <h3 class="card__title">
+                <a href="/product" class="card__link">
+                  Кресло с подлокотниками
+                </a>
+              </h3>
+              <p class="card__price">5&nbsp;000&nbsp;&#8381;</p>
+              <button type="button" class="card__btn">В корзину</button>
+              <button type="button" class="card__favorite">
+                <svg width="16" height="16">
+                  <use href="/img/sprite.svg#favorite" />
+                </svg>
+              </button>
+            </article>
+          </li>
+          <li class="goods__item">
+            <article class="goods__card card">
+              <a href="/product" class="card__link">
+                <img src="/img/photo.jpg" alt="Кресло с подлокотниками" class="card__img">
+              </a>
+              <h3 class="card__title">
+                <a href="/product" class="card__link">
+                  Кресло с подлокотниками
+                </a>
+              </h3>
+              <p class="card__price">5&nbsp;000&nbsp;&#8381;</p>
+              <button type="button" class="card__btn">В корзину</button>
+              <button type="button" class="card__favorite">
+                <svg width="16" height="16">
+                  <use href="/img/sprite.svg#favorite" />
+                </svg>
+              </button>
+            </article>
+          </li>
+          <li class="goods__item">
+            <article class="goods__card card">
+              <a href="/product" class="card__link">
+                <img src="/img/photo.jpg" alt="Кресло с подлокотниками" class="card__img">
+              </a>
+              <h3 class="card__title">
+                <a href="/product" class="card__link">
+                  Кресло с подлокотниками
+                </a>
+              </h3>
+              <p class="card__price">5&nbsp;000&nbsp;&#8381;</p>
+              <button type="button" class="card__btn">В корзину</button>
+              <button type="button" class="card__favorite">
+                <svg width="16" height="16">
+                  <use href="/img/sprite.svg#favorite" />
+                </svg>
+              </button>
+            </article>
+          </li>
+        </ul>
+      </section>
+
+      <section class="product" hidden>
+        <div class="container">
+          <h2 class="product__title">Кресло с подлокотниками</h2>
+          <div class="product__picture">
+            <div class="swiper product__slider-main">
+              <div class="swiper-wrapper product__main-list">
+                <div class="swiper-slide product__slide">
+                  <img src="/img/photo.jpg" />
+                </div>
+                <div class="swiper-slide product__slide">
+                  <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                </div>
+                <div class="swiper-slide product__slide">
+                  <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                </div>
+                <div class="swiper-slide product__slide">
+                  <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                </div>
+                <div class="swiper-slide product__slide">
+                  <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+                </div>
+                <div class="swiper-slide product__slide">
+                  <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+                </div>
+                <div class="swiper-slide product__slide">
+                  <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+                </div>
+                <div class="swiper-slide product__slide">
+                  <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+                </div>
+                <div class="swiper-slide product__slide">
+                  <img src="https://swiperjs.com/demos/images/nature-10.jpg" class="product__thumbnails-img" />
+                </div>
+              </div>
+              <button type="button" class="product__arrow product__arrow_next">
+                <svg width="32" height="32">
+                  <use href="/img/sprite.svg#next" />
+                </svg>
+              </button>
+              <button type="button" class="product__arrow product__arrow_prev">
+                <svg width="32" height="32">
+                  <use href="/img/sprite.svg#prev" />
+                </svg>
+              </button>
+            </div>
+            <div class="swiper product__slider-thumbnails">
+              <div class="swiper-wrapper product__thumbnails-list">
+                <div class="swiper-slide product__thumbnails-slide">
+                  <img src="/img/photo.jpg" />
+                </div>
+                <div class="swiper-slide product__thumbnails-slide">
+                  <img src="https://swiperjs.com/demos/images/nature-2.jpg" class="product__thumbnails-img" />
+                </div>
+                <div class="swiper-slide product__thumbnails-slide">
+                  <img src="https://swiperjs.com/demos/images/nature-3.jpg" class="product__thumbnails-img" />
+                </div>
+                <div class="swiper-slide product__thumbnails-slide">
+                  <img src="https://swiperjs.com/demos/images/nature-4.jpg" class="product__thumbnails-img" />
+                </div>
+                <div class="swiper-slide product__thumbnails-slide">
+                  <img src="https://swiperjs.com/demos/images/nature-5.jpg" class="product__thumbnails-img" />
+                </div>
+                <div class="swiper-slide product__thumbnails-slide">
+                  <img src="https://swiperjs.com/demos/images/nature-6.jpg" class="product__thumbnails-img" />
+                </div>
+                <div class="swiper-slide product__thumbnails-slide">
+                  <img src="https://swiperjs.com/demos/images/nature-7.jpg" class="product__thumbnails-img" />
+                </div>
+                <div class="swiper-slide product__thumbnails-slide">
+                  <img src="https://swiperjs.com/demos/images/nature-8.jpg" class="product__thumbnails-img" />
+                </div>
+                <div class="swiper-slide product__thumbnails-slide">
+                  <img src="https://swiperjs.com/demos/images/nature-10.jpg" class="product__thumbnails-img" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product__info">
+            <p class="product__price">5&nbsp;000&nbsp;&#8381;</p>
+            <p class="product__article">арт.&nbsp;84348945757</p>
+          </div>
+          <div class="product__characteristics">
+            <h3 class="product__characteristics-title">Общие характеристики</h3>
+            <table class="product__characteristics-table table">
+              <tr class="table__row">
+                <td class="table__filed">Коллекция</td>
+                <td class="table__value">Мирсаж</td>
+              </tr>
+              <tr class="table__row">
+                <td class="table__filed">Производитель</td>
+                <td class="table__value">Россия</td>
+              </tr>
+              <tr class="table__row">
+                <td class="table__filed">Гарантия</td>
+                <td class="table__value">18 мес.</td>
+              </tr>
+              <tr class="table__row">
+                <td class="table__filed">Срок службы</td>
+                <td class="table__value">5 лет</td>
+              </tr>
+              <tr class="table__row">
+                <td class="table__filed">Цвет</td>
+                <td class="table__value">Желтый</td>
+              </tr>
+              <tr class="table__row">
+                <td class="table__filed">Макс. нагрузка</td>
+                <td class="table__value">130 кг</td>
+              </tr>
+            </table>
+            <div class="product__btns">
+              <button type="button" class="product__btn">В корзину</button>
+              <button type="button" class="product__favorite">
+                <svg width="16" height="16">
+                  <use href="/img/sprite.svg#favorite" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cart" hidden>
+        <div class="container cart__container">
+          <h2 class="cart__title">Корзина</h2>
+
+          <ul class="cart__products">
+            <li class="cart__product">
+              <img src="/img/photo.jpg" alt="Кресло с подлокотниками" class="cart__img" />
+              <h3 class="cart__title-product">Кресло с подлокотниками</h3>
+              <p class="cart__price">5&nbsp;000&nbsp;&#8381;</p>
+              <p class="cart__article">арт.&nbsp;84348945757</p>
+              <div class="cart__product-control">
+                <button type="button" class="cart__product-btn">-</button>
+                <p class="cart__product-count">1</p>
+                <button type="button" class="cart__product-btn">+</button>
+              </div>
+            </li>
+            <li class="cart__product">
+              <img src="/img/photo.jpg" alt="Кресло с подлокотниками" class="cart__img" />
+              <h3 class="cart__title-product">Кресло с подлокотниками</h3>
+              <p class="cart__price">10&nbsp;000&nbsp;&#8381;</p>
+              <p class="cart__article">арт.&nbsp;84348945757</p>
+              <div class="cart__product-control">
+                <button type="button" class="cart__product-btn">-</button>
+                <p class="cart__product-count">2</p>
+                <button type="button" class="cart__product-btn">+</button>
+              </div>
+            </li>
+            <li class="cart__product">
+              <img src="/img/photo.jpg" alt="Кресло с подлокотниками" class="cart__img" />
+              <h3 class="cart__title-product">Кресло с подлокотниками</h3>
+              <p class="cart__price">5&nbsp;000&nbsp;&#8381;</p>
+              <p class="cart__article">арт.&nbsp;84348945757</p>
+              <div class="cart__product-control">
+                <button type="button" class="cart__product-btn">-</button>
+                <p class="cart__product-count">1</p>
+                <button type="button" class="cart__product-btn">+</button>
+              </div>
+            </li>
+          </ul>
+          <div class="cart__place">
+            <h3 class="cart__subtitle">Оформление</h3>
+            <div class="cart__place-info">
+              <p class="cart__place-count">4 товара на сумму:</p>
+              <p class="cart__place-price">20&nbsp;000&nbsp;&#8381;</p>
+            </div>
+            <p class="cart__place-delivery">Доставка 0 &#8381;</p>
+            <button type="submit" form="order" class="cart__place-btn">Оформить заказ</button>
+          </div>
+          <form id="order" action="#" method="POST" class="cart__form form-order">
+            <h3 class="cart__subtitle">Данные для доставки</h3>
+            <fieldset class="form-order__fieldset form-order__fieldset_input">
+              <input type="text" class="form-order__input" name="name" placeholder="Фамилия Имя Отчество" />
+              <input type="tel" class="form-order__input" name="phone" placeholder="Телефон" />
+              <input type="email" class="form-order__input" name="email" placeholder="E-mail" />
+              <input type="text" class="form-order__input" name="address" placeholder="Адрес доставки" />
+              <textarea name="comments" placeholder="Комментарий к заказу" class="form-order__textarea"></textarea>
+            </fieldset>
+            <fieldset class="form-order__fieldset form-order__fieldset_radio">
+              <legend class="form-order__legent">Доставка</legend>
+              <label class="form-order__label">
+                Доставка
+                <input type="radio" name="deliveryType" value="delivery" class="radio__input" />
+              </label>
+              <label class="form-order__label">
+                Самовывоз
+                <input type="radio" name="pickup" value="pickup" class="radio__input" />
+              </label>
+            </fieldset>
+            <fieldset class="form-order__fieldset form-order__fieldset_radio">
+              <legend class="form-order__legent">Оплата</legend>
+              <label class="form-order__label">
+                Картой при получении
+                <input type="radio" name="paymentType" value="card" class="radio__input" />
+              </label>
+              <label class="form-order__label">
+                Наличными при получении
+                <input type="radio" name="paymentType" value="cash" class="radio__input" />
+              </label>
+            </fieldset>
+          </form>
+        </div>
+      </section>
+
+      <section class="order">
+        <div class="container order__container">
+          <div class="order__info">
+            <p class="order__title">Заказ успешно размещен</p>
+            <p class="order__price">20&nbsp;000&nbsp;&#8381;</p>
+            <p class="order__number">&numero;43435</p>
+          </div>
+          <table class="order__table table">
+            <thead class="table__title">Данные доставки</thead>
+            <tr class="table__row">
+              <td class="table__filed">Получатель</td>
+              <td class="table__value">Иванов Петр Александрович</td>
+            </tr>
+            <tr class="table__row">
+              <td class="table__filed">Телефон</td>
+              <td class="table__value">+7 (737) 346 23 00</td>
+            </tr>
+            <tr class="table__row">
+              <td class="table__filed">E-mail</td>
+              <td class="table__value">Ivanov84@gmail.com</td>
+            </tr>
+            <tr class="table__row">
+              <td class="table__filed">Адрес доставки</td>
+              <td class="table__value">Москва, ул. Ленина, 21, кв. 33</td>
+            </tr>
+            <tr class="table__row">
+              <td class="table__filed">Способ оплаты</td>
+              <td class="table__value">Картой при получении</td>
+            </tr>
+            <tr class="table__row">
+              <td class="table__filed">Способ получения</td>
+              <td class="table__value">Доставка</td>
+            </tr>
+          </table>
+          <button type="button" class="order__btn">На главную</button>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="container footer__container">
+        <a href="/" class="footer__link-logo">
+          <img src="/img/logo.svg" alt="Логотип мебельного маркета Koff" class="footer__logo" />
+        </a>
+        <div class="footer__contacts contacts">
+          <a href="tel:+79398391297" class="contacts__phone">
+            <svg width="16" height="16">
+              <use href="/img/sprite.svg#phone" />
+            </svg>
+            <span>+7 (939) 839 12 97</span>
+          </a>
+          <ul class="contacts__list">
+            <li class="contacts__item">
+              <a href="#" class="contacts__link">
+                <svg width="16" height="16">
+                  <use href="/img/sprite.svg#vk" />
+                </svg>
+              </a>
+            </li>
+            <li class="contacts__item">
+              <a href="#" class="contacts__link">
+                <svg width="16" height="16">
+                  <use href="/img/sprite.svg#youtube" />
+                </svg>
+              </a>
+            </li>
+            <li class="contacts__item">
+              <a href="#" class="contacts__link">
+                <svg width="16" height="16">
+                  <use href="/img/sprite.svg#telegram" />
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <ul class="footer__developer-list">
+          <li class="footer__developer-item">
+            <span>Designer:</span>
+            <a href="https://t.me/Mrshmallowww">Anastasia Ilina</a>
+          </li>
+          <li class="footer__developer-item">
+            <span>Developer:</span>
+            <a href="https://t.me/rootdiv">Vladimir</a>
+          </li>
+        </ul>
+        <p class="footer__copyright">
+          &copy; Koff, 2023
+        </p>
+      </div>
+    </footer>
   </body>
 </html>
