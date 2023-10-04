@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="fonts" href="/fonts/open-sans-v36-cyrillic_latin-regular.woff2" as="font" type="font/woff2"
+      crossorigin />
+    <link rel="fonts" href="/fonts/open-sans-v36-cyrillic_latin-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="fonts" href="/fonts/inter-v13-cyrillic_latin-regular.woff2" as="font" type="font/woff2" crossorigin />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" src="/main.js"></script>
     <title>Мебельный маркет Koff</title>
@@ -21,32 +25,32 @@
             </svg>
           </button>
         </form>
-      </div>
-      <div class="header__control">
-        <a href="/favorites" class="header__link">
-          <span class="header__link-text">Избранное</span>
-          <svg width="16" height="16">
-            <use href="/img/sprite.svg#favorite" />
-          </svg>
-        </a>
-        <a href="/cart" class="header__link">
-          <span class="header__link-text">Корзина</span>
-          <span class="header__count">(5)</span>
-          <svg width="16" height="16">
-            <use href="/img/sprite.svg#cart" />
-          </svg>
-        </a>
+        <div class="header__control">
+          <a href="/favorites" class="header__link">
+            <span class="header__link-text">Избранное</span>
+            <svg width="16" height="16">
+              <use href="/img/sprite.svg#favorite" />
+            </svg>
+          </a>
+          <a href="/cart" class="header__link">
+            <span class="header__link-text">Корзина</span>
+            <span class="header__count">(5)</span>
+            <svg width="16" height="16">
+              <use href="/img/sprite.svg#cart" />
+            </svg>
+          </a>
+        </div>
       </div>
     </header>
     <main>
-      <nav class="catalog">
+      <nav class="catalog" hidden>
         <div class="container catalog__container">
           <ul class="catalog__list">
             <li class="catalog__item">
               <a href="/category?slug=Диваны" class="catalog__link">Диваны</a>
             </li>
             <li class="catalog__item">
-              <a href="/category?slug=Шкафы" class="catalog__link">Шкафы</a>
+              <a href="/category?slug=Шкафы" class="catalog__link catalog__link_active">Шкафы</a>
             </li>
             <li class="catalog__item">
               <a href="/category?slug=Стулья" class="catalog__link">Стулья</a>
@@ -75,7 +79,7 @@
           </ul>
         </div>
       </nav>
-      <div class="breadcrumb">
+      <div class="breadcrumb" hidden>
         <div class="container">
           <ul class="breadcrumb__list">
             <li class="breadcrumb__item">
@@ -94,161 +98,170 @@
         </div>
       </div>
       <section class="goods" hidden>
-        <div class="container">
+        <div class="container goods__container">
           <h2 class="goods__title">Избранное</h2>
+
+          <ul class="goods__list">
+            <li class="goods__item">
+              <article class="goods__card card">
+                <a href="/product" class="card__link card__link_img">
+                  <img src="/img/photo.jpg" alt="Кресло с подлокотниками" class="card__img">
+                </a>
+                <div class="card__info">
+                  <h3 class="card__title">
+                    <a href="/product" class="card__link">
+                      Кресло с подлокотниками
+                    </a>
+                  </h3>
+                  <p class="card__price">5&nbsp;000&nbsp;&#8381;</p>
+                </div>
+                <button type="button" class="card__btn">В корзину</button>
+                <button type="button" class="card__favorite">
+                  <svg width="16" height="16">
+                    <use href="/img/sprite.svg#favorite" />
+                  </svg>
+                </button>
+              </article>
+            </li>
+            <li class="goods__item">
+              <article class="goods__card card">
+                <a href="/product" class="card__link card__link_img">
+                  <img src="/img/photo.jpg" alt="Кресло с подлокотниками" class="card__img">
+                </a>
+                <div class="card__info">
+                  <h3 class="card__title">
+                    <a href="/product" class="card__link">
+                      Кресло с подлокотниками
+                    </a>
+                  </h3>
+                  <p class="card__price">5&nbsp;000&nbsp;&#8381;</p>
+                </div>
+                <button type="button" class="card__btn">В корзину</button>
+                <button type="button" class="card__favorite">
+                  <svg width="16" height="16">
+                    <use href="/img/sprite.svg#favorite" />
+                  </svg>
+                </button>
+              </article>
+            </li>
+            <li class="goods__item">
+              <article class="goods__card card">
+                <a href="/product" class="card__link card__link_img">
+                  <img src="/img/photo.jpg" alt="Кресло с подлокотниками" class="card__img">
+                </a>
+                <div class="card__info">
+                  <h3 class="card__title">
+                    <a href="/product" class="card__link">
+                      Кресло с подлокотниками
+                    </a>
+                  </h3>
+                  <p class="card__price">5&nbsp;000&nbsp;&#8381;</p>
+                </div>
+                <button type="button" disabled class="card__btn">В корзину</button>
+                <button type="button" class="card__favorite">
+                  <svg width="16" height="16">
+                    <use href="/img/sprite.svg#favorite" />
+                  </svg>
+                </button>
+              </article>
+            </li>
+            <li class="goods__item">
+              <article class="goods__card card">
+                <a href="/product" class="card__link card__link_img">
+                  <img src="/img/photo.jpg" alt="Кресло с подлокотниками" class="card__img">
+                </a>
+                <div class="card__info">
+                  <h3 class="card__title">
+                    <a href="/product" class="card__link">
+                      Кресло с подлокотниками
+                    </a>
+                  </h3>
+                  <p class="card__price">5&nbsp;000&nbsp;&#8381;</p>
+                </div>
+                <button type="button" class="card__btn">В корзину</button>
+                <button type="button" class="card__favorite">
+                  <svg width="16" height="16">
+                    <use href="/img/sprite.svg#favorite" />
+                  </svg>
+                </button>
+              </article>
+            </li>
+          </ul>
         </div>
-        <ul class="goods__list">
-          <li class="goods__item">
-            <article class="goods__card card">
-              <a href="/product" class="card__link">
-                <img src="/img/photo.jpg" alt="Кресло с подлокотниками" class="card__img">
-              </a>
-              <h3 class="card__title">
-                <a href="/product" class="card__link">
-                  Кресло с подлокотниками
-                </a>
-              </h3>
-              <p class="card__price">5&nbsp;000&nbsp;&#8381;</p>
-              <button type="button" class="card__btn">В корзину</button>
-              <button type="button" class="card__favorite">
-                <svg width="16" height="16">
-                  <use href="/img/sprite.svg#favorite" />
-                </svg>
-              </button>
-            </article>
-          </li>
-          <li class="goods__item">
-            <article class="goods__card card">
-              <a href="/product" class="card__link">
-                <img src="/img/photo.jpg" alt="Кресло с подлокотниками" class="card__img">
-              </a>
-              <h3 class="card__title">
-                <a href="/product" class="card__link">
-                  Кресло с подлокотниками
-                </a>
-              </h3>
-              <p class="card__price">5&nbsp;000&nbsp;&#8381;</p>
-              <button type="button" class="card__btn">В корзину</button>
-              <button type="button" class="card__favorite">
-                <svg width="16" height="16">
-                  <use href="/img/sprite.svg#favorite" />
-                </svg>
-              </button>
-            </article>
-          </li>
-          <li class="goods__item">
-            <article class="goods__card card">
-              <a href="/product" class="card__link">
-                <img src="/img/photo.jpg" alt="Кресло с подлокотниками" class="card__img">
-              </a>
-              <h3 class="card__title">
-                <a href="/product" class="card__link">
-                  Кресло с подлокотниками
-                </a>
-              </h3>
-              <p class="card__price">5&nbsp;000&nbsp;&#8381;</p>
-              <button type="button" class="card__btn">В корзину</button>
-              <button type="button" class="card__favorite">
-                <svg width="16" height="16">
-                  <use href="/img/sprite.svg#favorite" />
-                </svg>
-              </button>
-            </article>
-          </li>
-          <li class="goods__item">
-            <article class="goods__card card">
-              <a href="/product" class="card__link">
-                <img src="/img/photo.jpg" alt="Кресло с подлокотниками" class="card__img">
-              </a>
-              <h3 class="card__title">
-                <a href="/product" class="card__link">
-                  Кресло с подлокотниками
-                </a>
-              </h3>
-              <p class="card__price">5&nbsp;000&nbsp;&#8381;</p>
-              <button type="button" class="card__btn">В корзину</button>
-              <button type="button" class="card__favorite">
-                <svg width="16" height="16">
-                  <use href="/img/sprite.svg#favorite" />
-                </svg>
-              </button>
-            </article>
-          </li>
-        </ul>
       </section>
 
       <section class="product" hidden>
-        <div class="container">
+        <div class="container product__container">
           <h2 class="product__title">Кресло с подлокотниками</h2>
           <div class="product__picture">
             <div class="swiper product__slider-main">
               <div class="swiper-wrapper product__main-list">
                 <div class="swiper-slide product__slide">
-                  <img src="/img/photo.jpg" />
+                  <img src="/img/photo.jpg" class="product__thumbnails-img" />
                 </div>
                 <div class="swiper-slide product__slide">
-                  <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                  <img src="https://swiperjs.com/demos/images/nature-2.jpg" class="product__thumbnails-img" />
                 </div>
                 <div class="swiper-slide product__slide">
-                  <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                  <img src="https://swiperjs.com/demos/images/nature-3.jpg" class="product__thumbnails-img" />
                 </div>
                 <div class="swiper-slide product__slide">
-                  <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                  <img src="https://swiperjs.com/demos/images/nature-4.jpg" class="product__thumbnails-img" />
                 </div>
                 <div class="swiper-slide product__slide">
-                  <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+                  <img src="https://swiperjs.com/demos/images/nature-5.jpg" class="product__thumbnails-img" />
                 </div>
                 <div class="swiper-slide product__slide">
-                  <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+                  <img src="https://swiperjs.com/demos/images/nature-6.jpg" class="product__thumbnails-img" />
                 </div>
                 <div class="swiper-slide product__slide">
-                  <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+                  <img src="https://swiperjs.com/demos/images/nature-7.jpg" class="product__thumbnails-img" />
                 </div>
                 <div class="swiper-slide product__slide">
-                  <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+                  <img src="https://swiperjs.com/demos/images/nature-8.jpg" class="product__thumbnails-img" />
                 </div>
                 <div class="swiper-slide product__slide">
                   <img src="https://swiperjs.com/demos/images/nature-10.jpg" class="product__thumbnails-img" />
                 </div>
               </div>
-              <button type="button" class="product__arrow product__arrow_next">
-                <svg width="32" height="32">
-                  <use href="/img/sprite.svg#next" />
-                </svg>
-              </button>
               <button type="button" class="product__arrow product__arrow_prev">
                 <svg width="32" height="32">
                   <use href="/img/sprite.svg#prev" />
                 </svg>
               </button>
+              <button type="button" class="product__arrow product__arrow_next">
+                <svg width="32" height="32">
+                  <use href="/img/sprite.svg#next" />
+                </svg>
+              </button>
             </div>
             <div class="swiper product__slider-thumbnails">
               <div class="swiper-wrapper product__thumbnails-list">
-                <div class="swiper-slide product__thumbnails-slide">
-                  <img src="/img/photo.jpg" />
+                <div class="swiper-slide product__slide-thumbnail">
+                  <img src="/img/photo.jpg" class="product__thumbnails-img" />
                 </div>
-                <div class="swiper-slide product__thumbnails-slide">
+                <div class=" swiper-slide product__slide-thumbnail">
                   <img src="https://swiperjs.com/demos/images/nature-2.jpg" class="product__thumbnails-img" />
                 </div>
-                <div class="swiper-slide product__thumbnails-slide">
+                <div class="swiper-slide product__slide-thumbnail">
                   <img src="https://swiperjs.com/demos/images/nature-3.jpg" class="product__thumbnails-img" />
                 </div>
-                <div class="swiper-slide product__thumbnails-slide">
+                <div class="swiper-slide product__slide-thumbnail">
                   <img src="https://swiperjs.com/demos/images/nature-4.jpg" class="product__thumbnails-img" />
                 </div>
-                <div class="swiper-slide product__thumbnails-slide">
+                <div class="swiper-slide product__slide-thumbnail">
                   <img src="https://swiperjs.com/demos/images/nature-5.jpg" class="product__thumbnails-img" />
                 </div>
-                <div class="swiper-slide product__thumbnails-slide">
+                <div class="swiper-slide product__slide-thumbnail">
                   <img src="https://swiperjs.com/demos/images/nature-6.jpg" class="product__thumbnails-img" />
                 </div>
-                <div class="swiper-slide product__thumbnails-slide">
+                <div class="swiper-slide product__slide-thumbnail">
                   <img src="https://swiperjs.com/demos/images/nature-7.jpg" class="product__thumbnails-img" />
                 </div>
-                <div class="swiper-slide product__thumbnails-slide">
+                <div class="swiper-slide product__slide-thumbnail">
                   <img src="https://swiperjs.com/demos/images/nature-8.jpg" class="product__thumbnails-img" />
                 </div>
-                <div class="swiper-slide product__thumbnails-slide">
+                <div class="swiper-slide product__slide-thumbnail">
                   <img src="https://swiperjs.com/demos/images/nature-10.jpg" class="product__thumbnails-img" />
                 </div>
               </div>
@@ -257,42 +270,43 @@
           <div class="product__info">
             <p class="product__price">5&nbsp;000&nbsp;&#8381;</p>
             <p class="product__article">арт.&nbsp;84348945757</p>
-          </div>
-          <div class="product__characteristics">
-            <h3 class="product__characteristics-title">Общие характеристики</h3>
-            <table class="product__characteristics-table table">
-              <tr class="table__row">
-                <td class="table__filed">Коллекция</td>
-                <td class="table__value">Мирсаж</td>
-              </tr>
-              <tr class="table__row">
-                <td class="table__filed">Производитель</td>
-                <td class="table__value">Россия</td>
-              </tr>
-              <tr class="table__row">
-                <td class="table__filed">Гарантия</td>
-                <td class="table__value">18 мес.</td>
-              </tr>
-              <tr class="table__row">
-                <td class="table__filed">Срок службы</td>
-                <td class="table__value">5 лет</td>
-              </tr>
-              <tr class="table__row">
-                <td class="table__filed">Цвет</td>
-                <td class="table__value">Желтый</td>
-              </tr>
-              <tr class="table__row">
-                <td class="table__filed">Макс. нагрузка</td>
-                <td class="table__value">130 кг</td>
-              </tr>
-            </table>
-            <div class="product__btns">
-              <button type="button" class="product__btn">В корзину</button>
-              <button type="button" class="product__favorite">
-                <svg width="16" height="16">
-                  <use href="/img/sprite.svg#favorite" />
-                </svg>
-              </button>
+
+            <div class="product__characteristics">
+              <h3 class="product__characteristics-title">Общие характеристики</h3>
+              <table class="product__characteristics-table table">
+                <tr class="table__row">
+                  <td class="table__filed">Коллекция</td>
+                  <td class="table__value">Мирсаж</td>
+                </tr>
+                <tr class="table__row">
+                  <td class="table__filed">Производитель</td>
+                  <td class="table__value">Россия</td>
+                </tr>
+                <tr class="table__row">
+                  <td class="table__filed">Гарантия</td>
+                  <td class="table__value">18 мес.</td>
+                </tr>
+                <tr class="table__row">
+                  <td class="table__filed">Срок службы</td>
+                  <td class="table__value">5 лет</td>
+                </tr>
+                <tr class="table__row">
+                  <td class="table__filed">Цвет</td>
+                  <td class="table__value">Желтый</td>
+                </tr>
+                <tr class="table__row">
+                  <td class="table__filed">Макс. нагрузка</td>
+                  <td class="table__value">130 кг</td>
+                </tr>
+              </table>
+              <div class="product__btns">
+                <button type="button" class="product__btn">В корзину</button>
+                <button type="button" class="product__favorite">
+                  <svg width="16" height="16">
+                    <use href="/img/sprite.svg#favorite" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -347,7 +361,7 @@
             <button type="submit" form="order" class="cart__place-btn">Оформить заказ</button>
           </div>
           <form id="order" action="#" method="POST" class="cart__form form-order">
-            <h3 class="cart__subtitle">Данные для доставки</h3>
+            <h3 class="form-order__title">Данные для доставки</h3>
             <fieldset class="form-order__fieldset form-order__fieldset_input">
               <input type="text" class="form-order__input" name="name" placeholder="Фамилия Имя Отчество" />
               <input type="tel" class="form-order__input" name="phone" placeholder="Телефон" />
@@ -356,18 +370,18 @@
               <textarea name="comments" placeholder="Комментарий к заказу" class="form-order__textarea"></textarea>
             </fieldset>
             <fieldset class="form-order__fieldset form-order__fieldset_radio">
-              <legend class="form-order__legent">Доставка</legend>
+              <legend class="form-order__legend">Доставка</legend>
               <label class="form-order__label radio">
                 Доставка
                 <input type="radio" name="deliveryType" value="delivery" class="radio__input" />
               </label>
               <label class="form-order__label radio">
                 Самовывоз
-                <input type="radio" name="pickup" value="pickup" class="radio__input" />
+                <input type="radio" name="deliveryType" value="pickup" class="radio__input" />
               </label>
             </fieldset>
             <fieldset class="form-order__fieldset form-order__fieldset_radio">
-              <legend class="form-order__legent">Оплата</legend>
+              <legend class="form-order__legend">Оплата</legend>
               <label class="form-order__label radio">
                 Картой при получении
                 <input type="radio" name="paymentType" value="card" class="radio__input" />
@@ -383,39 +397,41 @@
 
       <section class="order">
         <div class="container order__container">
-          <div class="order__info">
-            <p class="order__title">Заказ успешно размещен</p>
-            <p class="order__price">20&nbsp;000&nbsp;&#8381;</p>
-            <p class="order__number">&numero;43435</p>
+          <div class="order__wrapper">
+            <div class="order__info">
+              <p class="order__title">Заказ успешно размещен</p>
+              <p class="order__price">20&nbsp;000&nbsp;&#8381;</p>
+              <p class="order__number">&numero;43435</p>
+            </div>
+            <table class="order__table table">
+              <caption class="table__title">Данные доставки</caption>
+              <tr class="table__row">
+                <td class="table__filed">Получатель</td>
+                <td class="table__value">Иванов Петр Александрович</td>
+              </tr>
+              <tr class="table__row">
+                <td class="table__filed">Телефон</td>
+                <td class="table__value">+7 (737) 346 23 00</td>
+              </tr>
+              <tr class="table__row">
+                <td class="table__filed">E-mail</td>
+                <td class="table__value">Ivanov84@gmail.com</td>
+              </tr>
+              <tr class="table__row">
+                <td class="table__filed">Адрес доставки</td>
+                <td class="table__value">Москва, ул. Ленина, 21, кв. 33</td>
+              </tr>
+              <tr class="table__row">
+                <td class="table__filed">Способ оплаты</td>
+                <td class="table__value">Картой при получении</td>
+              </tr>
+              <tr class="table__row">
+                <td class="table__filed">Способ получения</td>
+                <td class="table__value">Доставка</td>
+              </tr>
+            </table>
+            <button type="button" class="order__btn">На главную</button>
           </div>
-          <table class="order__table table">
-            <caption class="table__title">Данные доставки</caption>
-            <tr class="table__row">
-              <td class="table__filed">Получатель</td>
-              <td class="table__value">Иванов Петр Александрович</td>
-            </tr>
-            <tr class="table__row">
-              <td class="table__filed">Телефон</td>
-              <td class="table__value">+7 (737) 346 23 00</td>
-            </tr>
-            <tr class="table__row">
-              <td class="table__filed">E-mail</td>
-              <td class="table__value">Ivanov84@gmail.com</td>
-            </tr>
-            <tr class="table__row">
-              <td class="table__filed">Адрес доставки</td>
-              <td class="table__value">Москва, ул. Ленина, 21, кв. 33</td>
-            </tr>
-            <tr class="table__row">
-              <td class="table__filed">Способ оплаты</td>
-              <td class="table__value">Картой при получении</td>
-            </tr>
-            <tr class="table__row">
-              <td class="table__filed">Способ получения</td>
-              <td class="table__value">Доставка</td>
-            </tr>
-          </table>
-          <button type="button" class="order__btn">На главную</button>
         </div>
       </section>
     </main>

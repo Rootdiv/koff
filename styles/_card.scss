@@ -1,0 +1,96 @@
+.card {
+  position: relative;
+
+  &__link {
+    &_img {
+      display: block;
+      margin-bottom: 12px;
+
+      @media (min-width: 580px) {
+        margin-bottom: 16px;
+      }
+    }
+  }
+
+  &__img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+
+  &__info {
+    @media (min-width: 580px) {
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+  }
+
+  &__title {
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 4px;
+
+    @media (min-width: 580px) {
+      padding-top: 3px;
+      font-size: 16px;
+      margin-bottom: 0;
+    }
+  }
+
+  &__price {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 12px;
+
+    @media (min-width: 580px) {
+      font-size: 20px;
+      margin-bottom: 0;
+    }
+  }
+
+  &__btn {
+    color: #780096;
+    padding: 12px 24px;
+    border-radius: 32px;
+    border: 1px solid #780096;
+    width: 100%;
+
+    &:hover,
+    &:focus-visible {
+      color: #ffffff;
+      background-color: #9200b7;
+    }
+
+    &:active {
+      color: #780096;
+      border: 1px solid #cc00ff;
+      background-color: transparent;
+    }
+
+    &:disabled {
+      opacity: 20%;
+      pointer-events: none;
+    }
+  }
+
+  &__favorite {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    svg {
+      fill: transparent;
+    }
+
+    &:hover,
+    &:focus-visible,
+    &:active,
+    &_active {
+      color: #780096;
+      svg {
+        fill: #780096;
+      }
+    }
+  }
+}
