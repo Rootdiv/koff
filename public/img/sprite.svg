@@ -3,7 +3,7 @@
     <path d="M7.667 14a6.333 6.333 0 1 0 0-12.667 6.333 6.333 0 0 0 0 12.667ZM14.667 14.667l-1.334-1.334"
       stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
   </symbol>
-  <symbol id="favorite" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <symbol id="favorite" xmlns="http://www.w3.org/2000/svg">
     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
       d="M8.413 13.873c-.226.08-.6.08-.826 0-1.934-.66-6.254-3.413-6.254-8.08 0-2.06 1.66-3.726 3.707-3.726 1.213 0 2.287.586 2.96 1.493a3.686 3.686 0 0 1 2.96-1.493c2.047 0 3.707 1.666 3.707 3.726 0 4.667-4.32 7.42-6.254 8.08Z" />
   </symbol>
@@ -16,14 +16,13 @@
       d="M6.507 9.333V11.7M9.573 9.333V11.7M2.333 6.667l.94 5.76c.214 1.293.727 2.24 2.634 2.24h4.02c2.073 0 2.38-.907 2.62-2.16l1.12-5.84" />
   </symbol>
   <symbol id="next" xmlns="http://www.w3.org/2000/svg" fill="none">
-    <rect fill="#fff" fill-opacity=".4" rx="16" />
-    <path fill="#1c1c1c"
+    <rect width="32" height="32" fill="#ffffff" rx="16" />
+    <path fill="#1c1c1c" fill-opacity="1"
       d="m11.864 16 5.661-5.818a.5.5 0 1 0-.716-.697l-6 6.166a.5.5 0 0 0 0 .698l6 6.166a.499.499 0 1 0 .716-.697L11.864 16Z" />
   </symbol>
   <symbol id="prev" xmlns="http://www.w3.org/2000/svg" fill="none">
-    <rect fill="#fff" fill-opacity=".4" rx="16"
-      transform="matrix(-1 0 0 1 32 0)" />
-    <path fill="#1c1c1c"
+    <rect width="32" height="32" fill="#ffffff" rx="16" />
+    <path fill="#1c1c1c" fill-opacity="1"
       d="m20.136 16-5.661-5.818a.5.5 0 1 1 .716-.697l6 6.166a.5.5 0 0 1 0 .698l-6 6.166a.499.499 0 1 1-.716-.697L20.136 16Z" />
   </symbol>
   <symbol id="phone" xmlns="http://www.w3.org/2000/svg" fill="none">

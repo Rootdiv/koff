@@ -16,6 +16,7 @@
     width: 100%;
     object-fit: cover;
     border-radius: 16px;
+    aspect-ratio: 1/1;
   }
 
   &__info {
@@ -79,16 +80,14 @@
     position: absolute;
     top: 12px;
     right: 12px;
-    svg {
-      fill: transparent;
-    }
 
     &:hover,
     &:focus-visible,
     &:active,
     &_active {
       color: #780096;
-      svg {
+
+      .card__svg {
         fill: #780096;
       }
     }
