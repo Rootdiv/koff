@@ -97,7 +97,7 @@
           </ul>
         </div>
       </div>
-      <section class="goods" hidden>
+      <section class="goods">
         <div class="container goods__container">
           <h2 class="goods__title">Избранное</h2>
 
@@ -187,6 +187,27 @@
               </article>
             </li>
           </ul>
+
+          <div class="pagination">
+            <div class="pagination__bar" style="--width: calc((12 / 31) * 100%)"></div>
+            <div class="pagination__arrays">
+              <button type="button" class="pagination__left">
+                <svg width="16" height="16">
+                  <use href="/img/sprite.svg#left" />
+                </svg>
+              </button>
+              <p>
+                <span class="pagination__current">12</span>
+                из
+                <span class="pagination__total">31</span>
+              </p>
+              <button type="button" class="pagination__right">
+                <svg width="16" height="16">
+                  <use href="/img/sprite.svg#right" />
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -395,7 +416,7 @@
         </div>
       </section>
 
-      <section class="order">
+      <section class="order" hidden>
         <div class="container order__container">
           <div class="order__wrapper">
             <div class="order__info">
