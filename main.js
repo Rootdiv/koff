@@ -1,25 +1,50 @@
 import 'normalize.css';
 import './style.scss';
+import Navigo from 'navigo';
 
-import Swiper from 'swiper';
-import { Navigation, Thumbs } from 'swiper/modules';
-import 'swiper/css';
+import { Header } from './modules/Header/Header';
+import { Main } from './modules/Main/Main';
+import { productSlider } from './modules/productSlider';
+import { Footer } from './modules/Footer/Footer';
+import { Order } from './modules/Order/Order';
+import { NotFound } from './modules/NotFound/NotFound';
 
-const swiperThumbnails = new Swiper('.product__slider-thumbnails', {
-  spaceBetween: 10,
-  slidesPerView: 4,
-  freeMode: true,
-  watchSlidesProgress: true,
-});
+const init = () => {
+  new Header().mount();
+  new Main().mount();
+  new Footer().mount();
 
-new Swiper('.product__slider-main', {
-  spaceBetween: 10,
-  navigation: {
-    nextEl: '.product__arrow_prev',
-    prevEl: '.product__arrow_next',
-  },
-  modules: [Navigation, Thumbs],
-  thumbs: {
-    swiper: swiperThumbnails,
-  },
-});
+  const router = new Navigo('/', { linksSelector: 'a[href^="/"]' });
+  router
+    .on('/', () => {
+      console.log('На главной');
+    })
+    .on('/search', obj => {
+      console.log('obj:', obj);
+      console.log('search');
+    })
+    .on('/favorite', () => {
+      console.log('favorite');
+    })
+    .on('/cart', () => {
+      console.log('cart');
+    })
+    .on('/category', obj => {
+      console.log('obj:', obj);
+      console.log('category');
+    })
+    .on('/product/:id', obj => {
+      console.log('obj:', obj);
+      productSlider();
+    })
+    .on('/order', () => {
+      new Order().mount(new Main().element);
+    })
+    .notFound(() => {
+      new NotFound().mount(new Main().element);
+    });
+
+  router.resolve();
+};
+
+init();
