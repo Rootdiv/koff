@@ -12,7 +12,7 @@ import { ProductList } from './modules/ProductList/ProductList';
 import { ApiService } from './services/ApiService';
 import { Catalog } from './modules/Catalog/Catalog';
 
-const init = () => {
+const init = async () => {
   const router = new Navigo('/', { linksSelector: 'a[href^="/"]' });
   const api = new ApiService();
 
@@ -20,10 +20,9 @@ const init = () => {
   new Main().mount();
   new Footer().mount();
 
-  api.getProductCategories().then(data => {
-    new Catalog().mount(new Main().element, data);
-    router.updatePageLinks();
-  });
+  const categories = await api.getProductCategories();
+  new Catalog().mount(new Main().element, categories);
+  router.updatePageLinks();
 
   router
     .on(
