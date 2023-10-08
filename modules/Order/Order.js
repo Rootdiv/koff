@@ -67,9 +67,9 @@ export class Order {
   }
 
   getButton() {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'order__btn';
+    const button = document.createElement('a');
+    button.className = 'order__link-btn';
+    button.href = '/';
     button.textContent = 'На главную';
     return button;
   }

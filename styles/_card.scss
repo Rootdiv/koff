@@ -1,5 +1,8 @@
 .card {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 
   &__link {
     &_img {
@@ -20,6 +23,7 @@
   }
 
   &__info {
+    flex-grow: 1;
     @media (min-width: 580px) {
       display: flex;
       gap: 10px;

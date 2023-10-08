@@ -93,8 +93,10 @@
     margin-bottom: 24px;
   }
 
-  &__btn {
-    padding: 12px 24px;
+  &__link-btn {
+    display: block;
+    text-align: center;
+    padding: 12px 0;
     color: #ffffff;
     border: 1px solid transparent;
     background-color: #780096;

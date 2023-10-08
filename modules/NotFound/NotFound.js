@@ -19,7 +19,23 @@ export class NotFound {
     const error = document.createElement('h2');
     error.className = 'error__message';
     error.textContent = 'Страница не найдена';
+
     return error;
+  }
+
+  getMessage() {
+    const message = document.createElement('p');
+    message.className = 'error__info';
+    message.textContent = 'Через 5 секунд Вы будете перенаправлены ';
+
+    const link = document.createElement('a');
+    link.href = '/';
+    link.className = 'error__link';
+    link.textContent = 'на главную страницу';
+
+    message.append(link);
+
+    return message;
   }
 
   mount(parentElement) {
@@ -27,7 +43,7 @@ export class NotFound {
       return;
     }
 
-    this.containerElement.append(this.getError());
+    this.containerElement.append(this.getError(), this.getMessage());
 
     parentElement.append(this.element);
     this.isMounted = true;

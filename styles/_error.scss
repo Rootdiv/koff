@@ -1,6 +1,20 @@
 .error {
+  text-align: center;
+
   &__message {
     padding-top: 50px;
-    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  &__info {
+    font-size: 16px;
+  }
+
+  &__link {
+    &:hover,
+    &:focus-visible,
+    &:active {
+      color: #780096;
+    }
   }
 }
