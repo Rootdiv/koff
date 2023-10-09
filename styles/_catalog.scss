@@ -12,6 +12,10 @@
 
   &__container {
     padding: 0;
+
+    @media (min-width: 1120px) {
+      padding: 0;
+    }
   }
 
   &__list {
