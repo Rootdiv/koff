@@ -12,8 +12,7 @@ export class ApiService {
     try {
       if (!this.accessKey) {
         const response = await axios.get(`${this.#apiUrl}/api/users/accessKey`);
-        this.accessKey = response.data.accessKey;
-        keyServices.set(this.accessKey);
+        this.accessKey = keyServices.set(response.data.accessKey);
       }
     } catch (err) {
       console.error(err.message);
@@ -35,8 +34,7 @@ export class ApiService {
       return response.data;
     } catch (err) {
       if (err.response && err.response.status === 401) {
-        this.accessKey = null;
-        keyServices.delete('koff-accessKey');
+        this.accessKey = keyServices.delete('koff-accessKey');
 
         return this.getData(pathname, params);
       } else {

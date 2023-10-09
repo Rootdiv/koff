@@ -33,6 +33,10 @@
     &:active {
       color: #780096;
     }
+
+    &:not([href]) {
+      pointer-events: none;
+    }
   }
 
   &__right {
@@ -40,6 +44,10 @@
     &:focus-visible,
     &:active {
       color: #780096;
+    }
+
+    &:not([href]) {
+      pointer-events: none;
     }
   }
 

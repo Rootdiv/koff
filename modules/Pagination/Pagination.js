@@ -28,7 +28,11 @@ export class Pagination {
     return pagesElem;
   }
 
-  getPagination({ currentPage, totalPages }) {
+  getPagination({ url, slug }, { currentPage, totalPages }) {
+    const paramsUrl = new URLSearchParams();
+    if (slug) {
+      paramsUrl.set('slug', slug);
+    }
     this.element.textContent = '';
     const bar = document.createElement('div');
     bar.style = `--width: calc((${currentPage} / ${totalPages}) * 100%)`;
@@ -36,8 +40,12 @@ export class Pagination {
 
     const arrows = document.createElement('div');
     arrows.className = 'pagination__arrows';
-    const buttonLeft = document.createElement('button');
-    buttonLeft.type = 'button';
+    const buttonLeft = document.createElement('a');
+    const pagePrev = currentPage - 1;
+    if (pagePrev >= 1) {
+      paramsUrl.set('page', pagePrev);
+      buttonLeft.href = `/${url}?${paramsUrl}`;
+    }
     buttonLeft.className = 'pagination__left';
     buttonLeft.innerHTML = `
       <svg width="16" height="16">
@@ -45,8 +53,12 @@ export class Pagination {
       </svg>
     `;
 
-    const buttonRight = document.createElement('button');
-    buttonRight.type = 'button';
+    const buttonRight = document.createElement('a');
+    const pageNext = currentPage + 1;
+    if (pageNext <= totalPages) {
+      paramsUrl.set('page', pageNext);
+      buttonRight.href = `/${url}?${paramsUrl}`;
+    }
     buttonRight.className = 'pagination__right';
     buttonRight.innerHTML = `
       <svg width="16" height="16">
@@ -61,13 +73,12 @@ export class Pagination {
     this.element.append(bar, arrows);
   }
 
-  mount(data) {
+  mount(params, data) {
+    this.getPagination(params, data);
+
     if (this.isMounted) {
       return;
     }
-
-    this.getPagination(data);
-
     this.isMounted = true;
   }
 

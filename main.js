@@ -68,9 +68,9 @@ const init = async () => {
     })
     .on(
       '/category',
-      async ({ params: { slug } }) => {
-        const products = await api.getProducts(1, 12, undefined, slug);
-        new ProductList().mount(new Main().element, products, slug);
+      async ({ url, params: { page, slug } }) => {
+        const products = await api.getProducts(page, 12, undefined, slug);
+        new ProductList().mount(new Main().element, products, { url, slug });
         router.updatePageLinks();
       },
       {

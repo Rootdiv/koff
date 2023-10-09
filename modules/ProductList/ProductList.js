@@ -57,7 +57,7 @@ export class ProductList {
     this.containerElement.append(listElem);
   }
 
-  mount(parentElem, products, title) {
+  mount(parentElem, products, params, title) {
     this.containerElement.textContent = '';
     const titleElem = document.createElement('h2');
     titleElem.textContent = title ? title : 'Список товаров';
@@ -70,11 +70,12 @@ export class ProductList {
     this.updateListElem(productsData);
 
     if (products.pagination && products.pagination.totalPages > 1) {
-      new Pagination().mount(products.pagination);
+      new Pagination().mount(params, products.pagination);
       this.containerElement.append(new Pagination().element);
     }
 
     parentElem.append(this.element);
+
     if (this.isMounted) {
       return;
     }
