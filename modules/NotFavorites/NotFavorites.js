@@ -1,23 +1,23 @@
 import { getContainer } from '../getContainer';
 
-export class NotFavorite {
+export class NotFavorites {
   static instance = null;
 
   constructor() {
-    if (!NotFavorite.instance) {
-      NotFavorite.instance = this;
+    if (!NotFavorites.instance) {
+      NotFavorites.instance = this;
       this.element = document.createElement('section');
-      this.element.className = 'favorite';
+      this.element.className = 'favorites';
       this.containerElement = getContainer(this.element);
       this.isMounted = false;
     }
 
-    return NotFavorite.instance;
+    return NotFavorites.instance;
   }
 
   getMessage() {
     const error = document.createElement('h2');
-    error.className = 'favorite__message';
+    error.className = 'favorites__message';
     error.textContent = 'В избранное ничего не добавлено';
 
     return error;
@@ -25,7 +25,7 @@ export class NotFavorite {
 
   getButton() {
     const button = document.createElement('a');
-    button.className = 'favorite__link-btn';
+    button.className = 'favorites__link-btn';
     button.href = '/';
     button.textContent = 'На главную';
     return button;

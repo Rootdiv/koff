@@ -12,7 +12,7 @@ import { ProductList } from './modules/ProductList/ProductList';
 import { ApiService } from './services/ApiService';
 import { Catalog } from './modules/Catalog/Catalog';
 import { FavoriteService } from './services/StorageService';
-import { NotFavorite } from './modules/NotFavorite/NotFavorite';
+import { NotFavorites } from './modules/NotFavorites/NotFavorites';
 
 const init = async () => {
   const router = new Navigo('/', { linksSelector: 'a[href^="/"]' });
@@ -55,13 +55,13 @@ const init = async () => {
           new ProductList().mount(new Main().element, products, { url }, 'Избранное');
           router.updatePageLinks();
         } else {
-          new NotFavorite().mount(new Main().element);
+          new NotFavorites().mount(new Main().element);
         }
       },
       {
         leave(done) {
           new ProductList().unmount();
-          new NotFavorite().unmount();
+          new NotFavorites().unmount();
           done();
         },
       },
