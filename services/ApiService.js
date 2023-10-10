@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { API_URL } from '../const';
-import { LocalStorageService } from './LocalStorageService';
+import { AccessKeyService } from './StorageService';
 
-const keyServices = new LocalStorageService();
+const keyServices = new AccessKeyService();
 
 export class ApiService {
   #apiUrl = API_URL;
@@ -34,7 +34,7 @@ export class ApiService {
       return response.data;
     } catch (err) {
       if (err.response && err.response.status === 401) {
-        this.accessKey = keyServices.delete('koff-accessKey');
+        this.accessKey = keyServices.delete();
 
         return this.getData(pathname, params);
       } else {
@@ -43,7 +43,8 @@ export class ApiService {
     }
   }
 
-  async getProducts(page = 1, limit = 12, list, category, search) {
+  async getProducts(page = 1, limit = 12, favorites, category, search) {
+    const list = favorites ? favorites.join() : null;
     return await this.getData('api/products', { page, limit, list, category, search });
   }
 

@@ -11,18 +11,22 @@ import { NotFound } from './modules/NotFound/NotFound';
 import { ProductList } from './modules/ProductList/ProductList';
 import { ApiService } from './services/ApiService';
 import { Catalog } from './modules/Catalog/Catalog';
+import { FavoriteService } from './services/StorageService';
+import { NotFavorite } from './modules/NotFavorite/NotFavorite';
 
 const init = async () => {
   const router = new Navigo('/', { linksSelector: 'a[href^="/"]' });
   const api = new ApiService();
+  await api.getAccessKey();
 
   new Header().mount();
   new Main().mount();
   new Footer().mount();
 
-  const categories = await api.getProductCategories();
-  new Catalog().mount(new Main().element, categories);
-  router.updatePageLinks();
+  api.getProductCategories().then(categories => {
+    new Catalog().mount(new Main().element, categories);
+    router.updatePageLinks();
+  });
 
   router
     .on(
@@ -33,9 +37,6 @@ const init = async () => {
         router.updatePageLinks();
       },
       {
-        already() {},
-      },
-      {
         leave(done) {
           new ProductList().unmount();
           done();
@@ -44,21 +45,23 @@ const init = async () => {
     )
     .on('/search', obj => {
       console.log('obj:', obj);
-      console.log('search');
     })
     .on(
       '/favorite',
-      async () => {
-        const products = await api.getProducts();
-        new ProductList().mount(new Main().element, products, 'Избранное');
-        router.updatePageLinks();
-      },
-      {
-        already() {},
+      async ({ url, params }) => {
+        const favorites = new FavoriteService().get();
+        if (favorites.length) {
+          const products = await api.getProducts(params?.page, 12, favorites);
+          new ProductList().mount(new Main().element, products, { url }, 'Избранное');
+          router.updatePageLinks();
+        } else {
+          new NotFavorite().mount(new Main().element);
+        }
       },
       {
         leave(done) {
           new ProductList().unmount();
+          new NotFavorite().unmount();
           done();
         },
       },

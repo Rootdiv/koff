@@ -1,5 +1,6 @@
+import { Logo } from '../../features/Logo/Logo';
+import { favoriteSvg } from '../../features/favoriteSvg/favoriteSvg';
 import { getContainer } from '../getContainer';
-import { getLogo } from '../getLogo';
 
 export class Header {
   static instance = null;
@@ -48,13 +49,12 @@ export class Header {
     const favoriteLink = document.createElement('a');
     favoriteLink.className = 'header__link';
     favoriteLink.href = '/favorite';
-    favoriteLink.insertAdjacentHTML(
-      'afterbegin',
-      `<span class="header__link-text">Избранное</span>
-      <svg width="16" height="16" class="header__favorite">
-        <use href="/img/sprite.svg#favorite" />
-      </svg>`,
-    );
+
+    const favoriteText = document.createElement('span');
+    favoriteText.className = 'header__link-text';
+    favoriteText.textContent = 'Избранное';
+    favoriteLink.prepend(favoriteText);
+    favoriteLink.insertAdjacentHTML('beforeend', favoriteSvg('header__favorite'));
 
     const cartLink = document.createElement('a');
     cartLink.className = 'header__link';
@@ -92,7 +92,7 @@ export class Header {
       return;
     }
 
-    const logo = getLogo('header__link-logo', 'header__logo');
+    const logo = new Logo('header').create();
     const searchForm = this.getSearchForm();
     const navigation = this.getNavigation();
 

@@ -1,5 +1,5 @@
+import { Logo } from '../../features/Logo/Logo';
 import { getContainer } from '../getContainer';
-import { getLogo } from '../getLogo';
 
 export class Footer {
   static instance = null;
@@ -133,7 +133,7 @@ export class Footer {
       return;
     }
 
-    const logo = getLogo('footer__link-logo', 'footer__logo');
+    const logo = new Logo('footer').create();
     const contacts = this.getContacts();
     const developers = this.getDeveloperLinks();
     const copyright = this.getCopyright();
