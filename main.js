@@ -51,7 +51,8 @@ const init = async () => {
       async ({ url, params }) => {
         const favorites = new FavoriteService().get();
         if (favorites.length) {
-          const products = await api.getProducts(params?.page, 12, favorites);
+          const page = params?.page || 1;
+          const products = await api.getProducts({ page, list: favorites });
           new ProductList().mount(new Main().element, products, { url }, 'Избранное');
           router.updatePageLinks();
         } else {
@@ -72,7 +73,7 @@ const init = async () => {
     .on(
       '/category',
       async ({ url, params: { page, slug } }) => {
-        const products = await api.getProducts(page, 12, undefined, slug);
+        const products = await api.getProducts({ page: page || 1, category: slug });
         new ProductList().mount(new Main().element, products, { url, slug });
         router.updatePageLinks();
       },

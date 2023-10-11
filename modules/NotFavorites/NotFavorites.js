@@ -36,7 +36,9 @@ export class NotFavorites {
       return;
     }
 
-    this.containerElement.append(this.getMessage(), this.getButton());
+    if (!this.containerElement.childElementCount) {
+      this.containerElement.append(this.getMessage(), this.getButton());
+    }
 
     parentElement.append(this.element);
     this.isMounted = true;

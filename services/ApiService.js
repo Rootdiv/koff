@@ -43,9 +43,11 @@ export class ApiService {
     }
   }
 
-  async getProducts(page = 1, limit = 12, favorites, category, search) {
-    const list = favorites ? favorites.join() : null;
-    return await this.getData('api/products', { page, limit, list, category, search });
+  async getProducts(params = {}) {
+    if (params.list) {
+      params.list = params.list.join();
+    }
+    return await this.getData('api/products', params);
   }
 
   async getProductCategories() {

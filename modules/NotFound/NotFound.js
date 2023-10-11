@@ -43,7 +43,9 @@ export class NotFound {
       return;
     }
 
-    this.containerElement.append(this.getError(), this.getMessage());
+    if (!this.containerElement.childElementCount) {
+      this.containerElement.append(this.getError(), this.getMessage());
+    }
 
     parentElement.append(this.element);
     this.isMounted = true;
