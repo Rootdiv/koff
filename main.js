@@ -23,6 +23,16 @@ const init = async () => {
   new Main().mount();
   new Footer().mount();
 
+  const searchForm = new Header().containerElement.querySelector('.header__search');
+  const inputSearchForm = searchForm.querySelector('.header__input');
+
+  searchForm.addEventListener('submit', event => {
+    event.preventDefault();
+    if (inputSearchForm.value.trim() !== '') {
+      router.navigate(`/search?q=${inputSearchForm.value}`);
+    }
+  });
+
   api.getProductCategories().then(categories => {
     new Catalog().mount(new Main().element, categories);
     router.updatePageLinks();
@@ -42,10 +52,39 @@ const init = async () => {
           done();
         },
       },
+      {
+        already(match) {
+          match.route.handler();
+        },
+      },
     )
-    .on('/search', obj => {
-      console.log('obj:', obj);
-    })
+    .on(
+      '/search',
+      async ({ url, params }) => {
+        if (params?.q) {
+          const query = params.q;
+          const page = params?.page || 1;
+          inputSearchForm.value || (inputSearchForm.value = query);
+          const title = 'Результаты поиска:';
+          new Main().element.textContent = '';
+          const products = await api.getProducts({ page, q: query });
+          new ProductList().mount(new Main().element, products, { url, slug: query }, title);
+          router.updatePageLinks();
+        }
+      },
+      {
+        leave(done) {
+          searchForm.reset();
+          new ProductList().unmount();
+          done();
+        },
+      },
+      {
+        already(match) {
+          match.route.handler(match);
+        },
+      },
+    )
     .on(
       '/favorite',
       async ({ url, params }) => {
@@ -64,6 +103,11 @@ const init = async () => {
           new ProductList().unmount();
           new NotFavorites().unmount();
           done();
+        },
+      },
+      {
+        already(match) {
+          match.route.handler(match);
         },
       },
     )

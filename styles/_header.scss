@@ -60,6 +60,10 @@
     &:focus-visible {
       outline: 1px solid #dfe3eb;
     }
+
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
   }
 
   &__btn {

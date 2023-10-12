@@ -1,5 +1,5 @@
 import { Card } from '../../features/Card/Card';
-import { Pagination } from '../Pagination/Pagination';
+import { Pagination } from '../../features/Pagination/Pagination';
 import { getContainer } from '../getContainer';
 
 export class ProductList {
@@ -45,11 +45,23 @@ export class ProductList {
 
     const isArray = Array.isArray(products);
     const productsData = isArray ? products : products.data;
-    this.updateListElem(productsData);
+    if (productsData && productsData.length) {
+      this.updateListElem(productsData);
 
-    if (products.pagination && products.pagination.totalPages > 1) {
-      new Pagination().mount(params, products.pagination);
-      this.containerElement.append(new Pagination().element);
+      if (products.pagination && products.pagination.totalPages > 1) {
+        new Pagination().mount(params, products.pagination);
+        this.containerElement.append(new Pagination().element);
+      }
+    } else if (!productsData.length && params?.url === 'search') {
+      this.containerElement.insertAdjacentHTML(
+        'beforeend',
+        `<p class="goods__empty">По Вашему запросу ничего не найдено</p>`,
+      );
+    } else {
+      this.containerElement.insertAdjacentHTML(
+        'beforeend',
+        `<p class="goods__empty">Произошла ошибка, попробуйте зайти позже</p>`,
+      );
     }
 
     parentElem.append(this.element);

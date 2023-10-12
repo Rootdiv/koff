@@ -30,8 +30,11 @@ export class Pagination {
 
   getPagination({ url, slug }, { currentPage, totalPages }) {
     const paramsUrl = new URLSearchParams();
-    if (slug) {
+    if (url !== 'search' && slug) {
       paramsUrl.set('slug', slug);
+    }
+    if (url === 'search' && slug) {
+      paramsUrl.set('q', slug);
     }
     this.element.textContent = '';
     const bar = document.createElement('div');
