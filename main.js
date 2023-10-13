@@ -4,7 +4,7 @@ import Navigo from 'navigo';
 
 import { Header } from './modules/Header/Header';
 import { Main } from './modules/Main/Main';
-import { productSlider } from './modules/productSlider';
+import { productSlider } from './features/productSlider/productSlider';
 import { Footer } from './modules/Footer/Footer';
 import { Order } from './modules/Order/Order';
 import { NotFound } from './modules/NotFound/NotFound';
@@ -13,6 +13,8 @@ import { ApiService } from './services/ApiService';
 import { Catalog } from './modules/Catalog/Catalog';
 import { FavoriteService } from './services/StorageService';
 import { NotFavorites } from './modules/NotFavorites/NotFavorites';
+import { BreadCrumbs } from './features/BreadCrumbs/BreadCrumbs';
+import { ProductCard } from './modules/ProductCard/ProductCard';
 
 const init = async () => {
   const router = new Navigo('/', { linksSelector: 'a[href^="/"]' });
@@ -33,21 +35,18 @@ const init = async () => {
     }
   });
 
-  api.getProductCategories().then(categories => {
-    new Catalog().mount(new Main().element, categories);
-    router.updatePageLinks();
-  });
-
   router
     .on(
       '/',
       async () => {
+        new Catalog().mount(new Main().element);
         const products = await api.getProducts();
         new ProductList().mount(new Main().element, products);
         router.updatePageLinks();
       },
       {
         leave(done) {
+          new Catalog().unmount();
           new ProductList().unmount();
           done();
         },
@@ -64,10 +63,11 @@ const init = async () => {
         if (params?.q) {
           const query = params.q;
           const page = params?.page || 1;
-          inputSearchForm.value || (inputSearchForm.value = query);
           const title = 'Результаты поиска:';
           new ProductList().containerElement.textContent = '';
+          inputSearchForm.value || (inputSearchForm.value = query);
           const products = await api.getProducts({ page, q: query });
+          new BreadCrumbs().mount(new Main().element, [{ text: 'Поиск' }]);
           new ProductList().mount(new Main().element, products, { url, slug: query }, title);
           router.updatePageLinks();
         }
@@ -75,24 +75,23 @@ const init = async () => {
       {
         leave(done) {
           searchForm.reset();
+          new BreadCrumbs().unmount();
           new ProductList().unmount();
           done();
-        },
-      },
-      {
-        already(match) {
-          match.route.handler(match);
         },
       },
     )
     .on(
       '/favorite',
       async ({ url, params }) => {
+        new Catalog().mount(new Main().element);
         const favorites = new FavoriteService().get();
         if (favorites.length) {
+          const text = 'Избранное';
           const page = params?.page || 1;
+          new BreadCrumbs().mount(new Main().element, [{ text }]);
           const products = await api.getProducts({ page, list: favorites });
-          new ProductList().mount(new Main().element, products, { url }, 'Избранное');
+          new ProductList().mount(new Main().element, products, { url }, text);
           router.updatePageLinks();
         } else {
           new NotFavorites().mount(new Main().element);
@@ -100,6 +99,8 @@ const init = async () => {
       },
       {
         leave(done) {
+          new Catalog().unmount();
+          new BreadCrumbs().unmount();
           new ProductList().unmount();
           new NotFavorites().unmount();
           done();
@@ -116,22 +117,48 @@ const init = async () => {
     })
     .on(
       '/category',
-      async ({ url, params: { page, slug } }) => {
-        const products = await api.getProducts({ page: page || 1, category: slug });
+      async ({ url, params: { slug, page = 1 } }) => {
+        new Catalog().mount(new Main().element);
+        const products = await api.getProducts({ page, category: slug });
+        new BreadCrumbs().mount(new Main().element, [{ text: slug }]);
         new ProductList().mount(new Main().element, products, { url, slug });
         router.updatePageLinks();
       },
       {
         leave(done) {
+          new Catalog().unmount();
+          new BreadCrumbs().unmount();
           new ProductList().unmount();
           done();
         },
       },
     )
-    .on('/product/:id', obj => {
-      console.log('obj:', obj);
-      productSlider();
-    })
+    .on(
+      '/product/:id',
+      async ({ data: { id } }) => {
+        new Catalog().mount(new Main().element);
+        const data = await api.getProductById(id);
+        if (data?.category) {
+          new BreadCrumbs().mount(new Main().element, [
+            { text: data.category, href: `/category?slug=${data.category}` },
+            { text: data.name },
+          ]);
+          router.updatePageLinks();
+          new ProductCard().mount(new Main().element, data);
+          productSlider();
+        } else {
+          new ProductCard().mount(new Main().element, 'error');
+        }
+      },
+      {
+        leave(done) {
+          new Catalog().unmount();
+          new BreadCrumbs().unmount();
+          new ProductCard().unmount();
+          done();
+        },
+      },
+    )
     .on(
       '/order',
       () => {

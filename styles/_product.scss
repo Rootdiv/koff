@@ -106,6 +106,7 @@
   &__thumbnails-slide {
     border-radius: 16px;
     overflow: hidden;
+    cursor: pointer;
   }
 
   &__thumbnails-img {
@@ -210,12 +211,10 @@
       }
     }
 
-    svg {
+    &-svg {
       fill-opacity: 0.4;
-    }
 
-    &:hover {
-      svg {
+      &:hover {
         fill-opacity: 1;
       }
     }
@@ -224,5 +223,12 @@
       opacity: 20%;
       pointer-events: none;
     }
+  }
+
+  &__empty {
+    grid-column: 1 / -1;
+    padding-top: 50px;
+    font-size: 16px;
+    text-align: center;
   }
 }
