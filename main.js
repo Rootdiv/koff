@@ -66,7 +66,7 @@ const init = async () => {
           const page = params?.page || 1;
           inputSearchForm.value || (inputSearchForm.value = query);
           const title = 'Результаты поиска:';
-          new Main().element.textContent = '';
+          new ProductList().containerElement.textContent = '';
           const products = await api.getProducts({ page, q: query });
           new ProductList().mount(new Main().element, products, { url, slug: query }, title);
           router.updatePageLinks();
