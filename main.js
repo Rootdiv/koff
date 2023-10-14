@@ -45,21 +45,20 @@ const init = async () => {
         router.updatePageLinks();
       },
       {
+        already(match) {
+          match.route.handler();
+        },
         leave(done) {
           new Catalog().unmount();
           new ProductList().unmount();
           done();
         },
       },
-      {
-        already(match) {
-          match.route.handler();
-        },
-      },
     )
     .on(
       '/search',
       async ({ url, params }) => {
+        new Catalog().mount(new Main().element);
         if (params?.q) {
           const query = params.q;
           const page = params?.page || 1;
@@ -73,8 +72,12 @@ const init = async () => {
         }
       },
       {
+        already(match) {
+          match.route.handler(match);
+        },
         leave(done) {
           searchForm.reset();
+          new Catalog().unmount();
           new BreadCrumbs().unmount();
           new ProductList().unmount();
           done();
@@ -98,17 +101,15 @@ const init = async () => {
         }
       },
       {
+        already(match) {
+          match.route.handler(match);
+        },
         leave(done) {
           new Catalog().unmount();
           new BreadCrumbs().unmount();
           new ProductList().unmount();
           new NotFavorites().unmount();
           done();
-        },
-      },
-      {
-        already(match) {
-          match.route.handler(match);
         },
       },
     )
@@ -125,6 +126,9 @@ const init = async () => {
         router.updatePageLinks();
       },
       {
+        already(match) {
+          match.route.handler(match);
+        },
         leave(done) {
           new Catalog().unmount();
           new BreadCrumbs().unmount();
