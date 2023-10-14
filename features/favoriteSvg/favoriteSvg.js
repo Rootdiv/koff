@@ -4,8 +4,12 @@ export const favoriteSvg = className => `
   </svg>
 `;
 
-/* export const favoriteSvg = async () => {
-  const response = await fetch('/img/favorite.svg');
-  const svg = await response.text();
-  return new DOMParser().parseFromString(svg, 'image/svg+xml').querySelector('svg');
+/* let favorite = null
+export const favoriteSvg = async () => {
+  if(!favorite){
+    const response = await fetch('/img/favorite.svg');
+    const svg = await response.text();
+    favorite = new DOMParser().parseFromString(svg, 'image/svg+xml').querySelector('svg');
+    return favorite.cloneNode(true);
+  }
 }; */
