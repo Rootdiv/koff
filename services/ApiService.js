@@ -57,4 +57,81 @@ export class ApiService {
   async getProductById(id) {
     return await this.getData(`api/products/${id}`);
   }
+
+  async postProductToCart(productId, quantity = 1) {
+    if (!this.accessKey) {
+      await this.getAccessKey();
+    }
+    try {
+      const response = await axios.post(
+        `${this.#apiUrl}/api/cart/products`,
+        {
+          productId,
+          quantity,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${this.accessKey}`,
+          },
+        },
+      );
+
+      return response.data;
+    } catch (err) {
+      if (err.response && err.response.status === 401) {
+        this.accessKey = keyServices.delete();
+      }
+      console.error(err.message);
+    }
+  }
+
+  async updateQuantityProductToCart(productId, quantity) {
+    if (!this.accessKey) {
+      await this.getAccessKey();
+    }
+    try {
+      const response = await axios.put(
+        `${this.#apiUrl}/api/cart/products`,
+        {
+          productId,
+          quantity,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${this.accessKey}`,
+          },
+        },
+      );
+
+      return response.data;
+    } catch (err) {
+      if (err.response && err.response.status === 401) {
+        this.accessKey = keyServices.delete();
+      }
+      console.error(err.message);
+    }
+  }
+  async getCart() {
+    return await this.getData('api/cart');
+  }
+
+  async deleteProductFromCart(id) {
+    if (!this.accessKey) {
+      await this.getAccessKey();
+    }
+    try {
+      const response = await axios.delete(`${this.#apiUrl}/api/cart/products/${id}`, {
+        headers: {
+          Authorization: `Bearer ${this.accessKey}`,
+        },
+      });
+
+      return response.data;
+    } catch (err) {
+      if (err.response && err.response.status === 401) {
+        this.accessKey = keyServices.delete();
+      }
+      console.error(err.message);
+    }
+  }
 }

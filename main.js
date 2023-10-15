@@ -15,15 +15,18 @@ import { FavoriteService } from './services/StorageService';
 import { NotFavorites } from './modules/NotFavorites/NotFavorites';
 import { BreadCrumbs } from './features/BreadCrumbs/BreadCrumbs';
 import { ProductCard } from './modules/ProductCard/ProductCard';
+import { Cart } from './modules/Cart/Cart';
 
 const init = async () => {
   const router = new Navigo('/', { linksSelector: 'a[href^="/"]' });
   const api = new ApiService();
   await api.getAccessKey();
+  const count = await new ApiService().getCart();
 
   new Header().mount();
   new Main().mount();
   new Footer().mount();
+  new Header().changeCount(count.totalCount);
 
   const searchForm = new Header().containerElement.querySelector('.header__search');
   const inputSearchForm = searchForm.querySelector('.header__input');
@@ -113,9 +116,20 @@ const init = async () => {
         },
       },
     )
-    .on('/cart', () => {
-      console.log('cart');
-    })
+    .on(
+      '/cart',
+      async () => {
+        const cartItems = await api.getCart();
+        const emptyText = 'В корзину ничего не добавлено';
+        new Cart().mount(new Main().element, cartItems, emptyText);
+      },
+      {
+        leave(done) {
+          new Cart().unmount();
+          done();
+        },
+      },
+    )
     .on(
       '/category',
       async ({ url, params: { slug, page = 1 } }) => {

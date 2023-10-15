@@ -58,6 +58,11 @@
     &:focus-visible {
       outline: 1px solid #dfe3eb;
     }
+
+    &:disabled {
+      opacity: 50%;
+      pointer-events: none;
+    }
   }
 
   &__textarea {
