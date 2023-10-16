@@ -259,12 +259,13 @@ export class Cart {
     form.append(formTitle, inputFieldset, deliveryFieldset, paymentFieldset);
 
     deliveryFieldset.addEventListener('change', ({ target }) => {
-      if (target.value === 'delivery') {
+      if (target === deliveryInput) {
         address.disabled = false;
         address.required = true;
-      } else if (target.value === 'pickup') {
+      } else if (target === pickupInput) {
         address.disabled = true;
         address.required = false;
+        address.value = '';
       }
     });
 
