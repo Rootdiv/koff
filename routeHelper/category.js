@@ -6,7 +6,7 @@ import { ProductList } from '../modules/ProductList/ProductList';
 
 export const category = {
   async main({ url, params: { slug, page = 1 } }) {
-    new Catalog().mount(new Main().element);
+    (await new Catalog().mount(new Main().element)).setActiveLink(slug);
     const products = await api.getProducts({ page, category: slug });
     new BreadCrumbs().mount(new Main().element, [{ text: slug }]);
     new ProductList().mount(new Main().element, products, { url, slug });

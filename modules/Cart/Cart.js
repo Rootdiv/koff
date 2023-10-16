@@ -159,6 +159,7 @@ export class Cart {
     cartPlace.append(cartPlaceTitle, cartPlaceInfo, cartPlaceDelivery, cartPlaceBtn);
     this.containerElement.append(cartPlace);
   }
+
   renderForm() {
     const form = document.createElement('form');
     form.id = 'order';
@@ -239,7 +240,7 @@ export class Cart {
     const cardPaymentInput = document.createElement('input');
     cardPaymentInput.type = 'radio';
     cardPaymentInput.name = 'paymentType';
-    cardPaymentInput.value = 'payment';
+    cardPaymentInput.value = 'card';
     cardPaymentInput.required = true;
     cardPaymentInput.className = 'radio__input';
     cardPaymentLabel.append(cardPaymentInput);
@@ -269,17 +270,10 @@ export class Cart {
       }
     });
 
-    form.addEventListener('submit', event => {
-      event.preventDefault();
-      for (const [key, value] of new FormData(form)) {
-        console.log(`${key} - ${value}`);
-      }
-    });
-
     this.containerElement.append(form);
   }
 
-  async mount(parentElem, data, emptyText) {
+  mount(parentElem, data, emptyText) {
     if (this.isMounted) {
       return;
     }

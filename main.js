@@ -44,7 +44,7 @@ const init = async () => {
     .on('/cart', cart.main, cart.hooks)
     .on('/category', category.main, category.hooks)
     .on('/product/:id', product.main, product.hooks)
-    .on('/order', order.main, order.hooks)
+    .on('/order/:id', order.main, order.hooks)
     .notFound(notFound.main, notFound.hooks);
   router.resolve();
 };
