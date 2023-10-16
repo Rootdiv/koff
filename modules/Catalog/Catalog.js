@@ -12,6 +12,7 @@ export class Catalog {
       this.element.className = 'catalog';
       this.containerElement = getContainer(this.element, 'catalog__container');
       this.isMounted = false;
+      this.linksList = [];
     }
     return Catalog.instance;
   }
@@ -27,6 +28,7 @@ export class Catalog {
       link.className = 'catalog__link';
       link.href = `/category?slug=${item}`;
       link.textContent = item;
+      this.linksList.push(link);
 
       listItemElem.append(link);
       return listItemElem;
@@ -40,9 +42,21 @@ export class Catalog {
     this.catalogData = await new ApiService().getProductCategories();
   }
 
+  setActiveLink(slug) {
+    const encodedSlug = encodeURIComponent(slug);
+    this.linksList.forEach(link => {
+      const linkSlug = new URL(link.href).searchParams.get('slug');
+      if (encodeURIComponent(linkSlug) === encodedSlug) {
+        link.classList.add('catalog__link_active');
+      } else {
+        link.classList.remove('catalog__link_active');
+      }
+    });
+  }
+
   async mount(parentElem) {
     if (this.isMounted) {
-      return;
+      return this;
     }
 
     if (!this.catalogData) {
@@ -52,10 +66,14 @@ export class Catalog {
 
     parentElem.prepend(this.element);
     this.isMounted = true;
+    return this;
   }
 
   unmount() {
     this.element.remove();
     this.isMounted = false;
+    this.linksList.forEach(link => {
+      link.classList.remove('catalog__link_active');
+    });
   }
 }

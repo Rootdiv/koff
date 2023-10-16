@@ -15,7 +15,7 @@ export class Order {
     return Order.instance;
   }
 
-  getOrderInfo() {
+  getOrderInfo(id, totalPrice) {
     const orderInfo = document.createElement('div');
     orderInfo.className = 'order__info';
 
@@ -24,43 +24,50 @@ export class Order {
     title.textContent = 'Заказ успешно размещен';
     const price = document.createElement('p');
     price.className = 'order__price';
-    price.innerHTML = '20&nbsp;000&nbsp;&#8381;';
+    price.innerHTML = `${totalPrice.toLocaleString()}&nbsp;&#8381;`;
     const number = document.createElement('p');
     number.className = 'order__number';
-    number.innerHTML = '&numero;43435';
+    number.innerHTML = `&numero;${id}`;
 
     orderInfo.append(title, price, number);
 
     return orderInfo;
   }
 
-  getTableHTML() {
+  getTableHTML([data]) {
+    const payment = data.paymentType === 'card' ? 'Картой при получении' : 'Картой при получении';
+    const delivery = data.deliveryType === 'pickup' ? 'Самовывоз' : 'Доставка';
+
     return `
       <table class="order__table table">
         <caption class="table__title">Данные доставки</caption>
         <tr class="table__row">
           <td class="table__filed">Получатель</td>
-          <td class="table__value">Иванов Петр Александрович</td>
+          <td class="table__value">${data.name}</td>
         </tr>
         <tr class="table__row">
           <td class="table__filed">Телефон</td>
-          <td class="table__value">+7 (737) 346 23 00</td>
+          <td class="table__value">${data.phone}</td>
         </tr>
         <tr class="table__row">
           <td class="table__filed">E-mail</td>
-          <td class="table__value">Ivanov84@gmail.com</td>
+          <td class="table__value">${data.email}</td>
         </tr>
-        <tr class="table__row">
-          <td class="table__filed">Адрес доставки</td>
-          <td class="table__value">Москва, ул. Ленина, 21, кв. 33</td>
-        </tr>
+        ${
+          data.address
+            ? `<tr class="table__row">
+                <td class="table__filed">Адрес доставки</td>
+                <td class="table__value">${data.address}</td>
+              </tr>`
+            : ''
+        }
         <tr class="table__row">
           <td class="table__filed">Способ оплаты</td>
-          <td class="table__value">Картой при получении</td>
+          <td class="table__value">${payment}</td>
         </tr>
         <tr class="table__row">
           <td class="table__filed">Способ получения</td>
-          <td class="table__value">Доставка</td>
+          <td class="table__value">${delivery}</td>
         </tr>
       </table>
 		`;
@@ -74,21 +81,22 @@ export class Order {
     return button;
   }
 
-  getWrapper() {
+  getWrapper(data) {
+    const [{ id, totalPrice }] = data;
     const wrapper = document.createElement('div');
     wrapper.className = 'order__wrapper';
-    wrapper.insertAdjacentElement('afterbegin', this.getOrderInfo());
-    wrapper.insertAdjacentHTML('beforeend', this.getTableHTML());
+    wrapper.insertAdjacentElement('afterbegin', this.getOrderInfo(id, +totalPrice));
+    wrapper.insertAdjacentHTML('beforeend', this.getTableHTML(data));
     wrapper.append(this.getButton());
     return wrapper;
   }
 
-  mount(parentElement) {
+  mount(parentElement, data) {
     if (this.isMounted) {
       return;
     }
 
-    this.containerElement.append(this.getWrapper());
+    this.containerElement.append(this.getWrapper(data));
 
     parentElement.append(this.element);
     this.isMounted = true;

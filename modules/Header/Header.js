@@ -83,8 +83,7 @@ export class Header {
   }
 
   changeCount(n) {
-    //todo n - получить
-    this.countElement.textContent = `${n}`;
+    this.countElement.textContent = `(${n})`;
   }
 
   mount() {

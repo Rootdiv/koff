@@ -1,7 +1,6 @@
 import { API_URL } from '../../const';
 import { CardButton } from '../../features/CardButton/CardButton';
 import { FavoriteButton } from '../../features/FavoriteButton/FavoriteButton';
-import { Pagination } from '../../features/Pagination/Pagination';
 import { getContainer } from '../getContainer';
 
 export class ProductCard {

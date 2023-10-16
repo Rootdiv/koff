@@ -57,4 +57,51 @@ export class ApiService {
   async getProductById(id) {
     return await this.getData(`api/products/${id}`);
   }
+
+  async sendData(method, pathname, data = {}) {
+    if (!this.accessKey) {
+      await this.getAccessKey();
+    }
+    try {
+      const response = await axios({
+        method,
+        url: `${this.#apiUrl}/api/${pathname}`,
+        data,
+        headers: {
+          Authorization: `Bearer ${this.accessKey}`,
+        },
+      });
+
+      return response.data;
+    } catch (err) {
+      if (err.response && err.response.status === 401) {
+        this.accessKey = keyServices.delete();
+      }
+      console.error(err.message);
+    }
+  }
+
+  async postProductToCart(productId, quantity = 1) {
+    return await this.sendData('POST', 'cart/products', { productId, quantity });
+  }
+
+  async updateQuantityProductToCart(productId, quantity) {
+    return await this.sendData('PUT', 'cart/products', { productId, quantity });
+  }
+
+  async getCart() {
+    return await this.getData('api/cart');
+  }
+
+  async deleteProductFromCart(id) {
+    return await this.sendData('DELETE', `cart/products/${id}`);
+  }
+
+  async postOrder(data) {
+    return await this.sendData('POST', 'orders', data);
+  }
+
+  async getOrder(id) {
+    return await this.getData(`api/orders/${id}`);
+  }
 }

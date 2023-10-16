@@ -13,12 +13,9 @@ export class ProductList {
       this.element.className = 'goods';
       this.containerElement = getContainer(this.element, 'goods__container');
       this.isMounted = false;
-      this.addEvents();
     }
     return ProductList.instance;
   }
-
-  addEvents() {}
 
   updateListElem(data = []) {
     const listElem = document.createElement('ul');
@@ -55,12 +52,12 @@ export class ProductList {
     } else if (!productsData.length && params?.url === 'search') {
       this.containerElement.insertAdjacentHTML(
         'beforeend',
-        `<p class="goods__empty">По Вашему запросу ничего не найдено</p>`,
+        '<p class="goods__empty">По Вашему запросу ничего не найдено</p>',
       );
     } else {
       this.containerElement.insertAdjacentHTML(
         'beforeend',
-        `<p class="goods__empty">Произошла ошибка, попробуйте зайти позже</p>`,
+        '<p class="goods__empty">Произошла ошибка, попробуйте зайти позже</p>',
       );
     }
 
