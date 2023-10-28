@@ -98,7 +98,7 @@
   &__link {
     display: flex;
     flex-direction: row-reverse;
-    align-items: end;
+    align-items: flex-end;
     gap: 4px;
 
     @media (min-width: 580px) {

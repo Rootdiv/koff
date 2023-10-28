@@ -14,6 +14,7 @@ import { category } from './routeHelper/category';
 import { product } from './routeHelper/product';
 import { order } from './routeHelper/order';
 import { notFound } from './routeHelper/notFound';
+import { Catalog } from './modules/Catalog/Catalog';
 
 export const api = new ApiService();
 export const router = new Navigo('/', { linksSelector: 'a[href^="/"]' });
@@ -35,6 +36,12 @@ const init = async () => {
     if (inputSearchForm.value.trim() !== '') {
       router.navigate(`/search?q=${inputSearchForm.value}`);
     }
+  });
+
+  router.hooks({
+    after() {
+      new Catalog().setActiveLink();
+    },
   });
 
   router

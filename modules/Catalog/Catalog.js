@@ -11,6 +11,9 @@ export class Catalog {
       this.element = document.createElement('nav');
       this.element.className = 'catalog';
       this.containerElement = getContainer(this.element, 'catalog__container');
+      this.listElem = document.createElement('ul');
+      this.listElem.className = 'catalog__list';
+      this.containerElement.append(this.listElem);
       this.isMounted = false;
       this.linksList = [];
     }
@@ -18,9 +21,7 @@ export class Catalog {
   }
 
   renderListElem(data) {
-    const listElem = document.createElement('ul');
-    listElem.className = 'catalog__list';
-
+    this.listElem.textContent = '';
     const listItems = data.map(item => {
       const listItemElem = document.createElement('li');
       listItemElem.className = 'catalog__item';
@@ -34,8 +35,7 @@ export class Catalog {
       return listItemElem;
     });
 
-    listElem.append(...listItems);
-    this.containerElement.append(listElem);
+    this.listElem.append(...listItems);
   }
 
   async getData() {
@@ -72,8 +72,5 @@ export class Catalog {
   unmount() {
     this.element.remove();
     this.isMounted = false;
-    this.linksList.forEach(link => {
-      link.classList.remove('catalog__link_active');
-    });
   }
 }

@@ -1,7 +1,20 @@
 import { defineConfig } from 'vite';
+import legacy from '@vitejs/plugin-legacy';
+import autoprefixer from 'autoprefixer';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  plugins: [
+    legacy({
+      targets: ['defaults', 'not IE 11'],
+    }),
+  ],
+  css: {
+    preprocessorOptions: {
+      scss: {},
+    },
+    postcss: [autoprefixer({})],
+  },
   build: {
     rollupOptions: {
       output: {

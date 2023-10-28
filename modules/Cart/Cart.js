@@ -146,9 +146,9 @@ export class Cart {
 
     cartPlaceInfo.append(this.cartPlaceCount, this.cartPlacePrice);
 
-    const cartPlaceDelivery = document.createElement('p');
-    cartPlaceDelivery.className = 'cart__place-delivery';
-    cartPlaceDelivery.innerHTML = 'Доставка 0 &#8381;';
+    this.cartPlaceDelivery = document.createElement('p');
+    this.cartPlaceDelivery.className = 'cart__place-delivery';
+    this.cartPlaceDelivery.innerHTML = 'Доставка 500 &#8381;';
 
     const cartPlaceBtn = document.createElement('button');
     cartPlaceBtn.type = 'submit';
@@ -156,7 +156,7 @@ export class Cart {
     cartPlaceBtn.className = 'cart__place-btn';
     cartPlaceBtn.textContent = 'Оформить заказ';
 
-    cartPlace.append(cartPlaceTitle, cartPlaceInfo, cartPlaceDelivery, cartPlaceBtn);
+    cartPlace.append(cartPlaceTitle, cartPlaceInfo, this.cartPlaceDelivery, cartPlaceBtn);
     this.containerElement.append(cartPlace);
   }
 
@@ -263,10 +263,12 @@ export class Cart {
       if (target === deliveryInput) {
         address.disabled = false;
         address.required = true;
+        this.cartPlaceDelivery.innerHTML = 'Доставка 500 &#8381;';
       } else if (target === pickupInput) {
         address.disabled = true;
         address.required = false;
         address.value = '';
+        this.cartPlaceDelivery.innerHTML = 'Доставка 0 &#8381;';
       }
     });
 

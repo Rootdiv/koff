@@ -10,6 +10,15 @@ export class Order {
       this.element.className = 'order';
       this.containerElement = getContainer(this.element, 'order__container');
       this.isMounted = false;
+
+      this.deliveryTypeList = {
+        delivery: 'Доставка',
+        pickup: 'Самовывоз',
+      };
+      this.PaymentTypeList = {
+        card: 'Картой при получении',
+        cash: 'Наличными при получении',
+      };
     }
 
     return Order.instance;
@@ -34,10 +43,7 @@ export class Order {
     return orderInfo;
   }
 
-  getTableHTML([data]) {
-    const payment = data.paymentType === 'card' ? 'Картой при получении' : 'Картой при получении';
-    const delivery = data.deliveryType === 'pickup' ? 'Самовывоз' : 'Доставка';
-
+  getTableHTML(data) {
     return `
       <table class="order__table table">
         <caption class="table__title">Данные доставки</caption>
@@ -63,11 +69,11 @@ export class Order {
         }
         <tr class="table__row">
           <td class="table__filed">Способ оплаты</td>
-          <td class="table__value">${payment}</td>
+          <td class="table__value">${this.PaymentTypeList[data.paymentType]}</td>
         </tr>
         <tr class="table__row">
           <td class="table__filed">Способ получения</td>
-          <td class="table__value">${delivery}</td>
+          <td class="table__value">${this.deliveryTypeList[data.deliveryType]}</td>
         </tr>
       </table>
 		`;
@@ -81,11 +87,13 @@ export class Order {
     return button;
   }
 
-  getWrapper(data) {
-    const [{ id, totalPrice }] = data;
+  getWrapper([data]) {
+    const { id } = data;
+    const totalPrice = parseInt(data.totalPrice) + (data.deliveryType === 'delivery' ? 500 : 0);
+
     const wrapper = document.createElement('div');
     wrapper.className = 'order__wrapper';
-    wrapper.insertAdjacentElement('afterbegin', this.getOrderInfo(id, +totalPrice));
+    wrapper.insertAdjacentElement('afterbegin', this.getOrderInfo(id, totalPrice));
     wrapper.insertAdjacentHTML('beforeend', this.getTableHTML(data));
     wrapper.append(this.getButton());
     return wrapper;
