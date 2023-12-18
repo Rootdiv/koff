@@ -1,4 +1,5 @@
 import { router } from '../main';
+import { Main } from '../modules/Main/Main';
 import { NotFound } from '../modules/NotFound/NotFound';
 
 export const notFound = {
