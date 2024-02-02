@@ -1,4 +1,5 @@
 import { api, router } from '../main';
+import { Header } from '../modules/Header/Header';
 import { Main } from '../modules/Main/Main';
 import { Catalog } from '../modules/Catalog/Catalog';
 import { BreadCrumbs } from '../features/BreadCrumbs/BreadCrumbs';
@@ -13,7 +14,6 @@ export const search = {
       const page = params?.page || 1;
       const title = 'Результаты поиска:';
       new ProductList().containerElement.textContent = '';
-      inputSearchForm.value || (inputSearchForm.value = query);
       const products = await api.getProducts({ page, q: query });
       new ProductList().mount(new Main().element, products, { url, slug: query }, title);
     }
@@ -24,7 +24,7 @@ export const search = {
       match.route.handler(match);
     },
     leave(done) {
-      searchForm.reset();
+      new Header().searchForm.reset();
       new Catalog().unmount();
       new BreadCrumbs().unmount();
       new ProductList().unmount();
