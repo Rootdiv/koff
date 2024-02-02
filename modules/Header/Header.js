@@ -39,6 +39,7 @@ export class Header {
     );
 
     searchForm.append(input, button);
+    this.searchForm = searchForm;
     return searchForm;
   }
 

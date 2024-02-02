@@ -27,8 +27,11 @@ const init = async () => {
   new Footer().mount();
   new Header().changeCount(count.totalCount);
 
-  const searchForm = new Header().containerElement.querySelector('.header__search');
+  const searchForm = new Header().searchForm;
   const inputSearchForm = searchForm.querySelector('.header__input');
+
+  //Получаем данные для формы после перезагрузки страницы если они есть
+  inputSearchForm.value = router.getCurrentLocation()?.params?.q || '';
 
   searchForm.addEventListener('submit', event => {
     event.preventDefault();
