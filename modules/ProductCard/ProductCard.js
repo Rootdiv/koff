@@ -163,6 +163,7 @@ export class ProductCard {
 
     const titleElem = document.createElement('h2');
     titleElem.className = 'product__title';
+    titleElem.textContent = data.name;
 
     const productImages = this.getProductPicture(data.images);
     const productInfo = this.getProductInfo(data);
