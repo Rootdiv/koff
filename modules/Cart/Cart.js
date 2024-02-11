@@ -135,6 +135,7 @@ export class Cart {
     cartPlaceTitle.textContent = 'Оформление';
 
     const cartPlaceInfo = document.createElement('div');
+    cartPlaceInfo.className = 'cart__place-info';
 
     this.cartPlaceCount = document.createElement('p');
     this.cartPlaceCount.className = 'cart__place-count';

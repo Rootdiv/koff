@@ -15,7 +15,7 @@ export class Order {
         delivery: 'Доставка',
         pickup: 'Самовывоз',
       };
-      this.PaymentTypeList = {
+      this.paymentTypeList = {
         card: 'Картой при получении',
         cash: 'Наличными при получении',
       };
@@ -69,7 +69,7 @@ export class Order {
         }
         <tr class="table__row">
           <td class="table__filed">Способ оплаты</td>
-          <td class="table__value">${this.PaymentTypeList[data.paymentType]}</td>
+          <td class="table__value">${this.paymentTypeList[data.paymentType]}</td>
         </tr>
         <tr class="table__row">
           <td class="table__filed">Способ получения</td>
@@ -87,7 +87,7 @@ export class Order {
     return button;
   }
 
-  getWrapper([data]) {
+  getWrapper(data) {
     const { id } = data;
     const totalPrice = parseInt(data.totalPrice) + (data.deliveryType === 'delivery' ? 500 : 0);
 
