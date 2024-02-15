@@ -48,31 +48,31 @@ export class Order {
       <table class="order__table table">
         <caption class="table__title">Данные доставки</caption>
         <tr class="table__row">
-          <td class="table__filed">Получатель</td>
+          <td class="table__field">Получатель</td>
           <td class="table__value">${data.name}</td>
         </tr>
         <tr class="table__row">
-          <td class="table__filed">Телефон</td>
+          <td class="table__field">Телефон</td>
           <td class="table__value">${data.phone}</td>
         </tr>
         <tr class="table__row">
-          <td class="table__filed">E-mail</td>
+          <td class="table__field">E-mail</td>
           <td class="table__value">${data.email}</td>
         </tr>
         ${
           data.address
             ? `<tr class="table__row">
-                <td class="table__filed">Адрес доставки</td>
+                <td class="table__field">Адрес доставки</td>
                 <td class="table__value">${data.address}</td>
               </tr>`
             : ''
         }
         <tr class="table__row">
-          <td class="table__filed">Способ оплаты</td>
+          <td class="table__field">Способ оплаты</td>
           <td class="table__value">${this.paymentTypeList[data.paymentType]}</td>
         </tr>
         <tr class="table__row">
-          <td class="table__filed">Способ получения</td>
+          <td class="table__field">Способ получения</td>
           <td class="table__value">${this.deliveryTypeList[data.deliveryType]}</td>
         </tr>
       </table>
@@ -93,9 +93,14 @@ export class Order {
 
     const wrapper = document.createElement('div');
     wrapper.className = 'order__wrapper';
-    wrapper.insertAdjacentElement('afterbegin', this.getOrderInfo(id, totalPrice));
-    wrapper.insertAdjacentHTML('beforeend', this.getTableHTML(data));
-    wrapper.append(this.getButton());
+    if (!data) {
+      wrapper.insertAdjacentHTML('beforeend', '<div>Заказ не найден!</div>');
+    } else {
+      wrapper.insertAdjacentElement('afterbegin', this.getOrderInfo(id, totalPrice));
+      wrapper.insertAdjacentHTML('beforeend', this.getTableHTML(data));
+      wrapper.append(this.getButton());
+    }
+
     return wrapper;
   }
 

@@ -124,7 +124,7 @@ export class ProductCard {
       const tableRow = document.createElement('tr');
       tableRow.className = 'table__row';
       const tableFiled = document.createElement('td');
-      tableFiled.className = 'table__filed';
+      tableFiled.className = 'table__field';
       tableFiled.textContent = filed;
       const tableValue = document.createElement('td');
       tableValue.className = 'table__value';

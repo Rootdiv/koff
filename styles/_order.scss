@@ -60,6 +60,8 @@
 
     @media (min-width: 580px) {
       grid-template-areas: 'title price' 'number .';
+      font-size: 20px;
+      gap: 12px;
     }
   }
 
