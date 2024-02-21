@@ -1,1 +1,1 @@
-export const API_URL = 'https://koff-api.vercel.app';
+export const API_URL = `${window.location.protocol}//${window.location.hostname}:2815`;
