@@ -88,15 +88,15 @@ export class Order {
   }
 
   getWrapper(data) {
-    const { id } = data;
-    const totalPrice = parseInt(data.totalPrice) + (data.deliveryType === 'delivery' ? 500 : 0);
-
     const wrapper = document.createElement('div');
     wrapper.className = 'order__wrapper';
-    if (!data) {
+
+    if (!data?.id) {
       wrapper.insertAdjacentHTML('beforeend', '<div>Заказ не найден!</div>');
     } else {
-      wrapper.insertAdjacentElement('afterbegin', this.getOrderInfo(id, totalPrice));
+      const totalPrice = parseInt(data.totalPrice) + (data.deliveryType === 'delivery' ? 500 : 0);
+
+      wrapper.insertAdjacentElement('afterbegin', this.getOrderInfo(data.id, totalPrice));
       wrapper.insertAdjacentHTML('beforeend', this.getTableHTML(data));
       wrapper.append(this.getButton());
     }
