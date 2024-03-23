@@ -1,1 +1,2 @@
-export const API_URL = `${window.location.protocol}//${window.location.hostname}:2815`;
+export const API_URL =
+  import.meta.env.DEV ? 'http://localhost:2815' : 'https://api.rootdiv.ru/koff';
